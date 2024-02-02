@@ -1,17 +1,29 @@
-.form {
-    width: 100%;
-    margin: 30px auto;
+body {
+    background-color: #BFCDE0;
 }
 
-.form > h3 {
+.container {
+    width: 100%;
+    margin: 5% auto;
+}
+
+.form {
+    margin: 2% auto;
+    border: 1.5px solid #5D5D81;
+    border-radius: 5px;
+    padding: 5%;
+}
+
+.container > h3 {
     font-size: 35px;
     text-align: center;
+    font-weight: bold;
 }
 
 
 .form-label {
     text-align: left;
-    color: black;
+    color: 080F0F;
     font-size: 20px;
     font-weight: bold;
 }
