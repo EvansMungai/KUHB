@@ -6,8 +6,19 @@ const port = 3000;
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/booking', (req, res) => {
     res.sendFile(__dirname + '/src/booking.html');
+})
+app.post('/booking', (req, res)=> {
+    var hostelName = req.body.hostelName;
+    var room = req.body.room;
+    var bunk = req.body.bunk;
+    var gender = req.body.gender;
+    res.send("We have received your data");
+    console.log(hostelName);
+    console.log(room);
+    console.log(bunk);
+    console.log(gender);
 })
 app.get('/signin', (req, res) => {
     res.sendFile(__dirname + '/src/signin.html');
@@ -19,6 +30,11 @@ app.post('/signin', (req, res) => {
     console.log(password);
     res.send("We have received your data");
 });
+
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/src/login.html')
+})
+
 app.post('/login', (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
@@ -26,9 +42,7 @@ app.post('/login', (req, res) => {
     console.log(password);
     res.send("We have received your data");
 })
-app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/src/login.html')
-})
+
 app.listen(port, (err) => {
     if (err) {
         console.log(err);
