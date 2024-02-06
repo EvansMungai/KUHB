@@ -3,18 +3,19 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/studentdashboard', (req, res)=> {
-    res.sendFile(__dirname + '/src/studentdashboard.html');
+    res.render('studentdashboard');
 })
 app.get('/booking', (req, res) => {
-    res.sendFile(__dirname + '/src/booking.html');
+    res.render('booking');
 })
 
 app.get('/application', (req, res)=> {
-    res.sendFile(__dirname + '/src/application.html');
+    res.render('application');
 })
 
 app.post('/booking', (req, res)=> {
