@@ -9,9 +9,10 @@ body {
 
 .form {
     margin: 2% auto;
-    border: 1.5px solid #5D5D81;
+    border: 1px solid #5D5D81;
     border-radius: 5px;
     padding: 5%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .container > h3 {
