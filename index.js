@@ -6,9 +6,17 @@ const port = 3000;
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/studentdashboard', (req, res)=> {
+    res.sendFile(__dirname + '/src/studentdashboard.html');
+})
 app.get('/booking', (req, res) => {
     res.sendFile(__dirname + '/src/booking.html');
 })
+
+app.get('/application', (req, res)=> {
+    res.sendFile(__dirname + '/src/application.html');
+})
+
 app.post('/booking', (req, res)=> {
     var hostelName = req.body.hostelName;
     var room = req.body.room;
@@ -20,9 +28,11 @@ app.post('/booking', (req, res)=> {
     console.log(bunk);
     console.log(gender);
 })
+
 app.get('/signin', (req, res) => {
     res.sendFile(__dirname + '/src/signin.html');
 })
+
 app.post('/signin', (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
