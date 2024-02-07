@@ -1,0 +1,12 @@
+.navbar{
+    background-color: #5D5D81;
+    display: none;
+}
+.nav-item .nav-link{
+    color: white;
+}
+@media screen and (max-width: 800px) {
+    .navbar{
+        display: block;
+    }
+}

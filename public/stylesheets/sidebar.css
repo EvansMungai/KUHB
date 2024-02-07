@@ -83,3 +83,16 @@
     text-align: center;
     font-weight: bold;
 }
+@media screen and (max-width: 800px){
+    .sidebar{
+        display: none;
+    }
+    .home-section{
+        left: 0;
+        width: 100%;
+    }
+    .sidebar.close ~ .home-section{
+        left: 0;
+        width: 100%;
+    }
+}
