@@ -13,6 +13,10 @@
 .nav-item .nav-link i{
     padding-right: 5px;
 }
+.nav-item .nav-link .link-name{
+    font-size: 15px;
+    font-weight: 400;
+}
 @media screen and (max-width: 800px) {
     .navbar{
         display: block;
