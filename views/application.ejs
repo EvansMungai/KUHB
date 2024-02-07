@@ -3,180 +3,143 @@
 <%- include ('partials/navbar.ejs'); -%>
 <div class="container">
   <h3>INTERNAL HOSTEL APPLICATION FORM</h3>
-    <div class="form">
-      <form class="">
-        <div class="mb-3">
-          <div class="row">
-            <div class="col">
-              <label for="surname" class="form-label">SURNAME:</label>
-              <input type="text" class="form-control" />
-            </div>
-            <div class="col">
-              <label for="firstName" class="form-label">FIRST NAME:</label>
-              <input type="text" class="form-control" />
-            </div>
-            <div class="col">
-              <label for="middleName" class="form-label">MIDDLE NAME:</label>
-              <input type="text" class="form-control" />
-            </div>
-          </div>
+  <div class="form">
+    <form class="">
+      <div class="mb-3">
+      <label for="RegistrationNo" class="form-label"
+          >REGISTRATION NUMBER:</label
+        >
+        <input type="text" class="form-control" id="RegistrationNo" />
+      
+      <div class="row">
+        <div class="col">
+          <label for="ApplicationPeriod" class="form-label">YEAR OF STUDY:</label>
+          <input type="text" class="form-control" id="ApplicationPeriod"/>
         </div>
-        <div class="mb-3">
-          <label for="mobileNo" class="form-label">MOBILE NUMBER:</label>
-          <input type="number" class="form-control" />
-
-          <label for="RegistrationNo" class="form-label"
-            >REGISTRATION NUMBER:</label
-          >
-          <input type="text" class="form-control" />
-          <label for="course" class="form-label">COURSE:</label>
-          <input type="text" class="form-control"  />
+        <div class="col">
+          <label for="ApplicationPeriod" class="form-label">SEMESTER:</label>
+          <input type="number" class="form-control" id="ApplicationPeriod" />
         </div>
+      </div>
+      <div class="mb-3">
+        <label for="Disability" class="form-label"
+          >Do you live with any disability?</label
+        >
+        <label for="yes"class="form-label">YES</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          id="Disability"
+          value="YES"
+        />
+        <label for="no" class="form-label">NO</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          id="Disability"
+          value="NO"
+        />
+        <label for="DisabilityDetails"></label>
+        <input type="text" class="form-control" id="DisabilityDetails" placeholder="(If yes specify the disability)" />
+      </div><br>
+      <h3>SECTION II:NEEDS ASSESSMENT(Attach evidence where needed)</h3>
+      <div class="mb-3">
+        <label for="AccomodatedBefore" class="form-label"
+          >Have you ever been accomodated within the university?</label
+        >
+        <label for="yes" class="form-label">YES</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          id="AccomodatedBefore"
+          value="YES"
+        />
+        <label for="no" class="form-label">NO</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          id="AccomodatedBefore"
+          value="NO"
+        />
+        <label for="AccomodationPeriod">(If yes specify the period)</label
+        ><input type="number" class="form-control" id="AccomodationPeriod" placeholder="Specify" />
+        <label for="IsSponsored" class="form-label"
+          >Are you sponsored by an organization recognized by the University
+          and sponsorship includes accommodation?</label
+        >
 
-        <div class="row">
-          <div class="col">
-            <label for="year" class="form-label">YEAR OF STUDY:</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="col">
-            <label for="sem" class="form-label">SEMESTER:</label>
-            <input type="number" class="form-control" />
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="disability" class="form-label"
-            >Do you live with any disability?</label
-          >
-          <label for="yes"class="form-label">YES</label>
-          <input
-            class="form-check-input position-static"
-            type="checkbox"
-            id="blankCheckbox"
-            value="YES"
-          />
-          <label for="no" class="form-label">NO</label>
-          <input
-            class="form-check-input position-static"
-            type="checkbox"
-            id="blankCheckbox"
-            value="NO"
-          />
-          <label for="response"></label>
-          <input type="text" class="form-control" placeholder="(If yes specify the disability)" />
-        </div><br>
-        <h3>SECTION II:NEEDS ASSESSMENT(Attach evidence where needed)</h3>
-        <div class="mb-3">
-          <label for="Accomodation before" class="form-label"
-            >Have you ever been accomodated within the university?</label
-          >
-          <label for="yes" class="form-label">YES</label>
-          <input
-            class="form-check-input position-static"
-            type="checkbox"
-            id="blankCheckbox"
-            value="YES"
-          />
-          <label for="no" class="form-label">NO</label>
-          <input
-            class="form-check-input position-static"
-            type="checkbox"
-            id="blankCheckbox"
-            value="NO"
-          />
-          <label for="response">(If yes specify the period)</label
-          ><input type="number" class="form-control" placeholder="Specify" />
-          <label for="IsSponsored" class="form-label"
-            >Are you sponsored by an organization recognized by the University
-            and sponsorship includes accommodation?</label
-          >
+        <label for="Sponsor" 
+          > </label
+        ><input type="text" class="form-control"  id="Sponsor" placeholder="(Please provide the name of the sponsor)" />
 
-          <label for="sponsor" 
-            > </label
-          ><input type="text" class="form-control" placeholder="(Please provide the name of the sponsor)" />
+        <label for="ReceivesHelb" class="form-label"
+          >Do you receive HELB?
+        </label>
+        <label for="yes" class="form-label">YES</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          id="ReceivesHelb"
+          value="YES"
+        />
+        <label for="no" class="form-label">NO</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          id="ReceivesHelb"
+          value="NO"
+        />
+        <label for="HelbAmount">(If yes, how much per year)</label
+        ><input
+          type="number"
+          class="form-control"
+          id="HelbAmount"
+          placeholder="Helb Allocation per year …"
+        />
+        <label for="ReceivedBursary" class="form-label"
+          >Have you ever benefited from DeKUT bursary before?
+        </label>
 
-          <label for="ReceivesHelb" class="form-label"
-            >Do you receive HELB?
-          </label>
-          <label for="yes" class="form-label">YES</label>
-          <input
-            class="form-check-input position-static"
-            type="checkbox"
-            id="blankCheckbox"
-            value="YES"
-          />
-          <label for="no" class="form-label">NO</label>
-          <input
-            class="form-check-input position-static"
-            type="checkbox"
-            id="blankCheckbox"
-            value="NO"
-          />
-          <label for="HelbAmount">(If yes, how much per year)</label
-          ><input
-            type="number"
-            class="form-control"
-            placeholder="Helb Allocation per year …"
-          />
-          <label for="IsSponsored" class="form-label"
-            >Have you ever benefited from DeKUT bursary before?
-          </label>
+        <label for="BursaryAmount"></label
+        ><input
+          type="text"
+          class="form-control"
+          id="BursaryAmount"
+          placeholder="Amount Awarded"
+        />
+        <label for="WorkStudyBenefitsBefore" class="form-label"
+          >Have you ever benefited from Work-study program before?
+        </label>
 
-          <label for="sponsor"></label
-          ><input
-            type="text"
-            class="form-control"
-            placeholder="Amount Awarded"
-          />
-          <label for="IsSponsored" class="form-label"
-            >Have you ever benefited from Work-study program before?
-          </label>
+        <label for="WorkStudyPeriod"></label
+        ><input
+          type="number"
+          class="form-control"
+          id="WorkStudyPeriod"
+          placeholder="specify the period"
+        />
+        <label for="SpecialExamsOnFinancialGrounds" class="form-label"
+          >Have you ever deferred of studies on financial grounds?
+        </label>
 
-          <label for="sponsor"></label
-          ><input
-            type="number"
-            class="form-control"
-            placeholder="specify the period"
-          />
-          <label for="IsSponsored" class="form-label"
-            >Have you ever deferred of studies on financial grounds?
-          </label>
+        <label for="SpecialExamPeriod"></label
+        ><input
+          type="number"
+          class="form-control"
+          id="SpecialExamPeriod"
+          placeholder="If yes, state the period: …"
+        />
+        
+        <label for="ReasonsForConsideration" class="form-label"
+          >Briefly describe why you should be considered for a space within
+          the University hostels?
+        </label>
 
-          <label for="sponsor"></label
-          ><input
-            type="number"
-            class="form-control"
-            placeholder="If yes, state the period: …"
-          />
-          <label for="IsSponsored" class="form-label"
-            >Have you ever taken an academic leave?
-          </label>
-
-          <label for="sponsor"></label
-          ><input
-            type="number"
-            class="form-control"
-            placeholder="If yes, state the period: …"
-          />
-          <label for="IsSponsored" class="form-label"
-            >Have you ever requested for special exams on financial grounds?
-          </label>
-
-          <label for="sponsor"></label
-          ><input
-            type="text"
-            class="form-control"
-            placeholder="If yes, state the period: …"
-          />
-          <label for="IsSponsored" class="form-label"
-            >Briefly describe why you should be considered for a space within
-            the University hostels?
-          </label>
-
-          <label for="sponsor"></label
-          ><input type="text" class="form-control" /><br>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
-    </div>
+       
+        <input type="text" class="form-control" id="ReasonsForConsideration" /><br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
   </div>
+</div>
   <%- include ('partials/footer.ejs'); -%>
