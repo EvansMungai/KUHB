@@ -7,18 +7,14 @@
     <form class="">
       <div class="mb-3">
       <label for="RegistrationNo" class="form-label"
-          >REGISTRATION NUMBER:</label
+          >Registration Number:</label
         >
-        <input type="text" class="form-control" id="RegistrationNo" />
+        <input type="text" name="RegNo" class="form-control" id="RegistrationNo" />
       
       <div class="row">
         <div class="col">
-          <label for="ApplicationPeriod" class="form-label">YEAR OF STUDY:</label>
-          <input type="text" class="form-control" id="ApplicationPeriod"/>
-        </div>
-        <div class="col">
-          <label for="ApplicationPeriod" class="form-label">SEMESTER:</label>
-          <input type="number" class="form-control" id="ApplicationPeriod" />
+          <label for="ApplicationPeriod" class="form-label">Application Period:</label>
+          <input type="number" name="ApplicationPeriod" class="form-control" id="ApplicationPeriod" />
         </div>
       </div>
       <div class="mb-3">
@@ -29,6 +25,7 @@
         <input
           class="form-check-input position-static"
           type="checkbox"
+          name="isDisabled"
           id="Disability"
           value="YES"
         />
@@ -36,13 +33,14 @@
         <input
           class="form-check-input position-static"
           type="checkbox"
+          name="isDisabled"
           id="Disability"
           value="NO"
         />
         <label for="DisabilityDetails"></label>
-        <input type="text" class="form-control" id="DisabilityDetails" placeholder="(If yes specify the disability)" />
+        <input type="text" name="DisabilityDetails" class="form-control" id="DisabilityDetails" placeholder="(If yes specify the disability)" />
       </div><br>
-      <h3>SECTION II:NEEDS ASSESSMENT(Attach evidence where needed)</h3>
+      <h4>SECTION II:NEEDS ASSESSMENT(Attach evidence where needed)</h4>
       <div class="mb-3">
         <label for="AccomodatedBefore" class="form-label"
           >Have you ever been accomodated within the university?</label
@@ -51,6 +49,7 @@
         <input
           class="form-check-input position-static"
           type="checkbox"
+          name="accommodationBefore"
           id="AccomodatedBefore"
           value="YES"
         />
@@ -58,19 +57,36 @@
         <input
           class="form-check-input position-static"
           type="checkbox"
+          name="accommodationBefore"
           id="AccomodatedBefore"
           value="NO"
         />
+
         <label for="AccomodationPeriod">(If yes specify the period)</label
-        ><input type="number" class="form-control" id="AccomodationPeriod" placeholder="Specify" />
+        ><input type="number" name="AccomodationPeriod" class="form-control" id="AccomodationPeriod" placeholder="Specify" />
+
         <label for="IsSponsored" class="form-label"
           >Are you sponsored by an organization recognized by the University
-          and sponsorship includes accommodation?</label
-        >
+          and sponsorship includes accommodation?</label>
+        <label for="yes"class="form-label">YES</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="IsSponsored"
+          id="Disability"
+          value="YES"
+        />
+        <label for="no" class="form-label">NO</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="IsSponsored"
+          id="Disability"
+          value="NO"
+        />
 
-        <label for="Sponsor" 
-          > </label
-        ><input type="text" class="form-control"  id="Sponsor" placeholder="(Please provide the name of the sponsor)" />
+        <label for="sponsor">(If yes, provide the name of the sponsor)</label>
+        <input type="text" name="sponsor" class="form-control"  id="Sponsor" placeholder="(Please provide the name of the sponsor)" />
 
         <label for="ReceivesHelb" class="form-label"
           >Do you receive HELB?
@@ -79,6 +95,7 @@
         <input
           class="form-check-input position-static"
           type="checkbox"
+          name="ReceivesHelb"
           id="ReceivesHelb"
           value="YES"
         />
@@ -86,46 +103,102 @@
         <input
           class="form-check-input position-static"
           type="checkbox"
+          name="ReceivesHelb"
           id="ReceivesHelb"
           value="NO"
         />
+
         <label for="HelbAmount">(If yes, how much per year)</label
         ><input
           type="number"
           class="form-control"
+          name="HelbAmount"
           id="HelbAmount"
           placeholder="Helb Allocation per year …"
         />
         <label for="ReceivedBursary" class="form-label"
           >Have you ever benefited from DeKUT bursary before?
         </label>
+        <label for="yes" class="form-label">YES</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="ReceivedBursary"
+          id="bursary"
+          value="YES"
+        />
+        <label for="no" class="form-label">NO</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="ReceivedBursary"
+          id="bursary"
+          value="NO"
+        />
 
-        <label for="BursaryAmount"></label
+        <label for="BursaryAmount">(If yes, how much per year)</label
         ><input
           type="text"
           class="form-control"
+          name="BursaryAmount"
           id="BursaryAmount"
           placeholder="Amount Awarded"
         />
+
         <label for="WorkStudyBenefitsBefore" class="form-label"
           >Have you ever benefited from Work-study program before?
         </label>
+        <label for="yes" class="form-label">YES</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="WorkStudyBenefitsBefore"
+          id="Work-study"
+          value="YES"
+        />
+        <label for="no" class="form-label">NO</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="WorkStudyBenefitsBefore"
+          id="Work-study"
+          value="NO"
+        />
 
-        <label for="WorkStudyPeriod"></label
+        <label for="WorkStudyPeriod">(If yes, specify the period)</label
         ><input
           type="number"
           class="form-control"
+          name="WorkStudyPeriod"
           id="WorkStudyPeriod"
           placeholder="specify the period"
         />
+
         <label for="SpecialExamsOnFinancialGrounds" class="form-label"
           >Have you ever deferred of studies on financial grounds?
         </label>
+        <label for="yes" class="form-label">YES</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="deferred"
+          id="deferred"
+          value="YES"
+        />
+        <label for="no" class="form-label">NO</label>
+        <input
+          class="form-check-input position-static"
+          type="checkbox"
+          name="deferred"
+          id="deferred"
+          value="NO"
+        />
 
-        <label for="SpecialExamPeriod"></label
+        <label for="SpecialExamPeriod">(If yes, specify the period)</label
         ><input
           type="number"
           class="form-control"
+          name="SpecialExamPeriod"
           id="SpecialExamPeriod"
           placeholder="If yes, state the period: …"
         />
@@ -134,9 +207,8 @@
           >Briefly describe why you should be considered for a space within
           the University hostels?
         </label>
+        <input type="text" name="ReasonsForConsideration" class="form-control" id="ReasonsForConsideration" /><br>
 
-       
-        <input type="text" class="form-control" id="ReasonsForConsideration" /><br>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
