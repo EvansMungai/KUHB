@@ -12,9 +12,9 @@ app.get('/studentdashboard', (req, res) => {
     db.query('select * from hostels', (err, result) => {
         if (err) {
             return err;
-        } else{
+        } else {
             res.render('./layouts/studentdashboard', {
-                sampleData: result ,
+                sampleData: result,
             })
         }
     })
@@ -40,7 +40,9 @@ app.post('/booking', (req, res) => {
 })
 
 app.get('/signin', (req, res) => {
-    res.sendFile(__dirname + '/src/signin.html');
+    res.render('./layouts/signin', {
+        pageTitle: "Sign in"
+    });
 })
 
 app.post('/signin', (req, res) => {
@@ -52,7 +54,9 @@ app.post('/signin', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/src/login.html')
+    res.render('./layouts/login', {
+        pageTitle: "Log in"
+    })
 })
 
 app.post('/login', (req, res) => {
