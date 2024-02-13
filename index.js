@@ -2,23 +2,32 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+const db = require('./src/config/database');
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/studentdashboard', (req, res)=> {
-    res.render('studentdashboard');
+app.get('/studentdashboard', (req, res) => {
+    db.query('select * from hostels', (err, result) => {
+        if (err) {
+            return err;
+        } else{
+            res.render('./layouts/studentdashboard', {
+                sampleData: result ,
+            })
+        }
+    })
 })
 app.get('/booking', (req, res) => {
-    res.render('booking');
+    res.render('./layouts/booking');
 })
 
-app.get('/application', (req, res)=> {
-    res.render('application');
+app.get('/application', (req, res) => {
+    res.render('./layouts/application');
 })
 
-app.post('/booking', (req, res)=> {
+app.post('/booking', (req, res) => {
     var hostelName = req.body.hostelName;
     var room = req.body.room;
     var bunk = req.body.bunk;

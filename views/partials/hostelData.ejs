@@ -1,0 +1,28 @@
+<div class="form">
+    <table class="table table-striped table-responsive">
+        <thead>
+          <tr>
+              <th scope="col">Hostel Number</th>
+              <th scope="col">Hostel Name</th>
+              <th scope="col">Capacity</th>
+              <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (sampleData.length > 0){ %>
+              <% sampleData.forEach((data)=>{ %>
+                  <tr>
+                    <td><%= data.HostelNo %></td>
+                    <td><%= data.HostelName %></td>
+                    <td><%= data.Capacity %></td>
+                    <td><%= data.Type %></td>
+                  </tr>
+                <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="4">No Data Found</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+</div>
