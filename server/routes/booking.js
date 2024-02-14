@@ -1,5 +1,5 @@
+const bookingController = require('../controllers/studentDashboardController')
+
 module.exports = (app)=>{
-    app.get('/student/booking', (req, res) => {
-        res.render('./layouts/booking');
-    })
+    app.get('/student/booking', bookingController.booking)
 }

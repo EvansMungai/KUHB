@@ -11,7 +11,15 @@ exports.homepage = async (req, res) => {
     })
 }
 exports.booking = async (req, res)=>{
-    res.render('./layouts/booking');
+    db.query('select * from hostels', (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            res.render('./layouts/booking', {
+                sampleData: result,
+            })
+        }
+    })
 }
 exports.application = async (req, res)=>{
     res.render('./layouts/application');

@@ -8,13 +8,19 @@
         <label for="hostel-name" class="form-label">Hostel Name:</label>
         <select id="hostel-name" name="hostelName" size="1" class="form-select">
           <option value="" selected disabled>(select one)</option>
+          <% if (sampleData.length > 0){ %>
+            <% sampleData.forEach((data)=>{ %>
+              <option value=""><%= data.HostelName %></option>
+              <% }) %>
+          <% } else { %>
           <option value="Batian">Batian</option>
           <option value="Serengeti">Serengeti</option>
           <option value="Mt Kenya">Mt Kenya</option>
           <option value="Simba">Simba</option>
+          <% } %>
         </select>
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="room" class="form-label">Room</label>
         <select id="room" name="room" size="1" class="form-select">
           <option value="" selected disabled>(select one)</option>
@@ -31,8 +37,8 @@
           <option value="M3">M3</option>
           <option value="M4">M4</option>
         </select>
-      </div>
-      <div class="mb-3">
+      </div> -->
+      <!-- <div class="mb-3">
         <label for="bunk" class="form-label">Bunk</label>
         <select id="bunk" name="bunk" size="1" class="form-select">
           <option value="" selected disabled>(select one)</option>
@@ -40,8 +46,8 @@
           <option value="lower">UPPER</option>
         </select>
       </div>
-      <div>
-        <p class="form-label">Gender</p>
+      <div> -->
+        <!-- <p class="form-label">Gender</p>
         <div class="form-check">
           <label for="male" class="form-check-label">Male</label>
           <input type="radio" class="form-check-input" id="male" name="gender" value="male" />
@@ -50,7 +56,7 @@
           <label for="female" class="form-check-label">Female</label>
           <input type="radio" class="form-check-input" id="female" name="gender" value="female" />
         </div>
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
