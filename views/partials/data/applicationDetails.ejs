@@ -1,17 +1,21 @@
-<div class="form">
+<div class="">
     <table class="table table-striped table-responsive">
         <thead>
           <tr>
+              <th scope="col">Application Number</th>
+              <th scope="col">Registration Number</th>
               <th scope="col">Room Number</th>
-              <th scope="col">Hostel Number</th>
+              <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
           <% if (sampleData.length > 0){ %>
               <% sampleData.forEach((data)=>{ %>
                   <tr>
+                    <td><%= data.ApplicationNo %></td>
+                    <td><%= data.RegistrationNo %></td>
                     <td><%= data.RoomNo %></td>
-                    <td><%= data.HostelNo %></td>
+                    <td><%= data.Status %></td>
                   </tr>
                 <% }) %>
           <% } else { %>

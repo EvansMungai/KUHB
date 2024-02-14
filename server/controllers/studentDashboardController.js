@@ -15,6 +15,17 @@ exports.applicationDetails = async (req, res)=>{
         if (err) {
             return err;
         } else {
+            res.render('./layouts/studentApplicationDetails', {
+                sampleData: result
+            })
+        }
+    })
+}
+exports.userDetails = async (req, res)=>{
+    db.query('select * from users', (err, result)=>{
+        if (err) {
+            return err;
+        } else {
             res.render('./layouts/studentdashboard', {
                 sampleData: result
             })
