@@ -11,7 +11,7 @@ exports.homepage = async (req, res) => {
     })
 }
 exports.booking = async (req, res)=>{
-    db.query('select * from hostels', (err, result) => {
+    db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
         if (err) {
             return err;
         } else {
