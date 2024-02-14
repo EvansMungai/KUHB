@@ -6,7 +6,9 @@ exports.showSuccessfulApplications = async (req, res) => {
         } else {
             res.render('./layouts/matronDashboard', {
                 link1: "Successful Applications",
+                link1Href: "/matron",
                 link2: "Allocate Rooms",
+                link2Href: "/matron/allocaterooms",
                 sampleData: result,
             })
         }
