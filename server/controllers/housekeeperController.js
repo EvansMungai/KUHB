@@ -20,7 +20,7 @@ exports.showSuccessfulApplications = async (req, res) => {
         if (err) {
             return err;
         } else {
-            res.render('./layouts/housekeeperDashboard', {
+            res.render('./layouts/housekeeperSuccessfulApplications', {
                 link1: "Review applications",
                 link1Href: "/housekeeper",
                 link2: "Successful Applications",
