@@ -15,7 +15,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.container > h3 {
+.container>h3 {
     font-size: 35px;
     text-align: center;
     font-weight: bold;
@@ -27,4 +27,28 @@ body {
     color: 080F0F;
     font-size: 18px;
     font-weight: bold;
+}
+
+table {
+    table-layout: fixed;
+    width: auto;
+}
+
+th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+@media screen and (max-width: 800px) {
+    th{
+        font-size: 8px;
+    }
+    td{
+        font-size: 6px;
+    }
+    td { 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        word-wrap: break-word;
+    }
 }
