@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    app.get('/application', (req, res) => {
+    app.get('/student/application', (req, res) => {
         res.render('./layouts/application');
     })
 }
