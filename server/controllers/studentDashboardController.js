@@ -10,6 +10,12 @@ exports.homepage = async (req, res) => {
         }
     })
 }
+exports.booking = async (req, res)=>{
+    res.render('./layouts/booking');
+}
+exports.application = async (req, res)=>{
+    res.render('./layouts/application');
+}
 exports.applicationDetails = async (req, res)=>{
     db.query('select * from applications', (err, result)=>{
         if (err) {
