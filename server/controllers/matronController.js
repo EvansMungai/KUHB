@@ -5,6 +5,8 @@ exports.showSuccessfulApplications = async (req, res) => {
             return err;
         } else {
             res.render('./layouts/matronDashboard', {
+                link1: "Successful Applications",
+                link2: "Allocate Rooms",
                 sampleData: result,
             })
         }
