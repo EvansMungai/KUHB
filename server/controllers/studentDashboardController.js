@@ -10,3 +10,14 @@ exports.homepage = async (req, res) => {
         }
     })
 }
+exports.applicationDetails = async (req, res)=>{
+    db.query('select * from applications', (err, result)=>{
+        if (err) {
+            return err;
+        } else {
+            res.render('./layouts/studentdashboard', {
+                sampleData: result
+            })
+        }
+    })
+}

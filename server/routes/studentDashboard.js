@@ -2,4 +2,5 @@ const studentDashboardController = require('../controllers/studentDashboardContr
 
 module.exports = (app)=>{
     app.get('/studentdashboard', studentDashboardController.homepage);
+    app.get('/studentdashboard/applicationdetails', studentDashboardController.applicationDetails);
 }
