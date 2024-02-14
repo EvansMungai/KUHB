@@ -3,14 +3,14 @@
 <%- include ('../partials/navbar.ejs'); -%>
 <div class="container">
     <h3>Book A Hostel</h3>
-    <form class="form" action="/booking" method="post">
+    <form class="form" action="/student/booking" method="post">
       <div class="mb-3">
         <label for="hostel-name" class="form-label">Hostel Name:</label>
         <select id="hostel-name" name="hostelName" size="1" class="form-select">
           <option value="" selected disabled>(select one)</option>
           <% if (sampleData.length > 0){ %>
             <% sampleData.forEach((data)=>{ %>
-              <option value=""><%= data.HostelName %></option>
+              <option value="<%= data.HostelName %>" class="row"><%= data.HostelNo %>.   <%= data.HostelName %></option>
               <% }) %>
           <% } else { %>
           <option value="Batian">Batian</option>
@@ -21,12 +21,12 @@
         </select>
       </div>
       <div class="mb-3">
-        <label for="room" class="form-label">Room</label>
+        <label for="room" class="form-label">Room:</label>
         <select id="room" name="room" size="1" class="form-select">
           <option value="" selected disabled>(select one)</option>
           <% if (sampleData.length > 0){ %>
             <% sampleData.forEach((data)=>{ %>
-              <option value=""><%= data.RoomNo %></option>
+              <option value="<%= data.RoomNo%>"><%= data.RoomNo %></option>
               <% }) %>
           <% } else { %>
           <option value="B1">B1</option>
@@ -45,13 +45,12 @@
         </select>
       </div>
       <!-- <div class="mb-3">
-        <label for="bunk" class="form-label">Bunk</label>
-        <select id="bunk" name="bunk" size="1" class="form-select">
+        <label for="gender" class="form-label">Gender:</label>
+        <select id="gender" name="Gender" size="1" class="form-select">
           <option value="" selected disabled>(select one)</option>
-          <option value="lower">LOWER</option>
-          <option value="lower">UPPER</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
-      </div>
       <div> -->
         <!-- <p class="form-label">Gender</p>
         <div class="form-check">

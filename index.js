@@ -4,16 +4,16 @@ const app = express();
 const port = 3000;
 const db = require('./server/config/database');
 
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 require('./server/routes/adminDashboard')(app);
 require('./server/routes/application')(app);
 require('./server/routes/booking')(app);
 require('./server/routes/housekeeperDashboard')(app);
 require('./server/routes/matronDashboard')(app);
 require('./server/routes/studentDashboard')(app);
-
-app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/login', (req, res) => {
     res.render('./layouts/login', {
@@ -63,7 +63,7 @@ app.post('/application', (req, res) => {
         SpecialExamPeriod: specialExamsPeriod,
         ReasonsForConsideration: reasonsForConsideration
     }
-    db.query('insert into applications set?', params, (err, result)=>{
+    db.query('insert into applications set?', params, (err, result) => {
         if (err) {
             throw err;
         } else {
@@ -72,17 +72,7 @@ app.post('/application', (req, res) => {
         }
     })
 })
-app.post('/booking', (req, res) => {
-    var hostelName = req.body.hostelName;
-    var room = req.body.room;
-    var bunk = req.body.bunk;
-    var gender = req.body.gender;
-    res.send("We have received your data");
-    console.log(hostelName);
-    console.log(room);
-    console.log(bunk);
-    console.log(gender);
-})
+
 
 app.post('/signin', (req, res) => {
     var username = req.body.username;
@@ -91,13 +81,13 @@ app.post('/signin', (req, res) => {
         Username: username,
         Password: password
     }
-    db.query('insert into users set?', params, (err, result)=>{
+    db.query('insert into users set?', params, (err, result) => {
         if (err) {
             throw err;
-        } else{
+        } else {
             res.redirect('/studentdashboard');
         }
-    } )
+    })
 });
 
 // app.get('/login', (req, res) => {

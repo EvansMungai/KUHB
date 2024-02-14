@@ -21,6 +21,13 @@ exports.booking = async (req, res)=>{
         }
     })
 }
+exports.postBookingData = async (req ,res)=>{
+        var hostelName = req.body.hostelName;
+        var room = req.body.room;
+        res.render('./layouts/application')
+        console.log(hostelName);
+        console.log(room);
+}
 exports.application = async (req, res)=>{
     res.render('./layouts/application');
 }
