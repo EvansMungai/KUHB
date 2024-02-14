@@ -10,6 +10,23 @@
           >Registration Number:</label
         >
         <input type="text" name="RegNo" class="form-control" id="RegistrationNo" required/>
+      </div>
+      <div class="mb-3">
+        <label for="hostel-name" class="form-label">Hostel Name:</label>
+        <select id="hostel-name" name="hostelName" size="1" class="form-select">
+          <option value="" selected disabled>(select one)</option>
+          <% if (sampleData.length > 0){ %>
+            <% sampleData.forEach((data)=>{ %>
+              <option value="<%= data.HostelName %>" class="row"><%= data.HostelNo %>.   <%= data.HostelName %></option>
+              <% }) %>
+          <% } else { %>
+          <option value="Batian">Batian</option>
+          <option value="Serengeti">Serengeti</option>
+          <option value="Mt Kenya">Mt Kenya</option>
+          <option value="Simba">Simba</option>
+          <% } %>
+        </select>
+      </div>
       
       <div class="row">
         <div class="col">
@@ -207,7 +224,7 @@
           >Briefly describe why you should be considered for a space within
           the University hostels?
         </label>
-        <input type="text" name="ReasonsForConsideration" class="form-control" id="ReasonsForConsideration" /><br>
+        <textarea type="text" name="ReasonsForConsideration" class="form-control" id="ReasonsForConsideration" required ></textarea><br>
 
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>

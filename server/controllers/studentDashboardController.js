@@ -29,7 +29,15 @@ exports.postBookingData = async (req ,res)=>{
         console.log(room);
 }
 exports.application = async (req, res)=>{
-    res.render('./layouts/application');
+    db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            res.render('./layouts/application', {
+                sampleData: result,
+            })
+        }
+    })
 }
 exports.applicationDetails = async (req, res)=>{
     db.query('select * from applications', (err, result)=>{

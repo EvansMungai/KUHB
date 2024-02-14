@@ -6,4 +6,5 @@ module.exports = (app)=>{
     app.get('/student/application', studentDashboardController.application);
     app.get('/student/accommodationdetails', studentDashboardController.applicationDetails);
     app.get('/student/userdetails', studentDashboardController.userDetails);
+    // app.post('/student/application')
 }

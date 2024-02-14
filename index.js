@@ -9,7 +9,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./server/routes/adminDashboard')(app);
-require('./server/routes/application')(app);
 require('./server/routes/booking')(app);
 require('./server/routes/housekeeperDashboard')(app);
 require('./server/routes/matronDashboard')(app);
@@ -25,7 +24,7 @@ app.get('/signin', (req, res) => {
         pageTitle: "Sign In"
     });
 })
-app.post('/application', (req, res) => {
+app.post('/student/application', (req, res) => {
     var registrationNo = req.body.RegNo;
     var applicationPeriod = req.body.ApplicationPeriod;
     var disabled = req.body.isDisabled;
@@ -44,7 +43,6 @@ app.post('/application', (req, res) => {
     var specialExamsPeriod = req.body.SpecialExamPeriod;
     var reasonsForConsideration = req.body.ReasonsForConsideration;
     let params = {
-        ApplicationNo: 1,
         ApplicationPeriod: applicationPeriod,
         RegistrationNo: registrationNo,
         Disability: disabled,
