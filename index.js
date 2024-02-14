@@ -9,7 +9,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./server/routes/adminDashboard')(app);
-require('./server/routes/booking')(app);
 require('./server/routes/housekeeperDashboard')(app);
 require('./server/routes/matronDashboard')(app);
 require('./server/routes/studentDashboard')(app);
@@ -24,53 +23,6 @@ app.get('/signin', (req, res) => {
         pageTitle: "Sign In"
     });
 })
-app.post('/student/application', (req, res) => {
-    var registrationNo = req.body.RegNo;
-    var applicationPeriod = req.body.ApplicationPeriod;
-    var disabled = req.body.isDisabled;
-    var disabilityDetails = req.body.DisabilityDetails;
-    var accommodationBefore = req.body.accommodationBefore;
-    var accommodationPeriod = req.body.AccommodationPeriod;
-    var sponsored = req.body.IsSponsored;
-    var sponsor = req.body.sponsor;
-    var receivesHelb = req.body.ReceivesHelb;
-    var helbAmount = req.body.HelbAmount;
-    var receivedBursary = req.body.ReceivedBursary;
-    var bursaryAmount = req.body.BursaryAmount;
-    var workStudyBenefitsBefore = req.body.WorkStudyBenefitsBefore;
-    var workStudyPeriod = req.body.WorkStudyPeriod;
-    var specialExamsOnFinancialGrounds = req.body.deferred;
-    var specialExamsPeriod = req.body.SpecialExamPeriod;
-    var reasonsForConsideration = req.body.ReasonsForConsideration;
-    let params = {
-        ApplicationPeriod: applicationPeriod,
-        RegistrationNo: registrationNo,
-        Disability: disabled,
-        DisabilityDetails: disabilityDetails,
-        AccommodatedBefore: accommodationBefore,
-        AccommodationPeriod: accommodationPeriod,
-        IsSponsored: sponsored,
-        Sponsor: sponsor,
-        ReceivesHelb: receivesHelb,
-        HelbAmount: helbAmount,
-        ReceivedBursary: receivedBursary,
-        BursaryAmount: bursaryAmount,
-        WorkStudyBenefitsBefore: workStudyBenefitsBefore,
-        WorkStudyPeriod: workStudyPeriod,
-        SpecialExamsOnFinancialGrounds: specialExamsOnFinancialGrounds,
-        SpecialExamPeriod: specialExamsPeriod,
-        ReasonsForConsideration: reasonsForConsideration
-    }
-    db.query('insert into applications set?', params, (err, result) => {
-        if (err) {
-            throw err;
-        } else {
-            res.send("We have received your data");
-            res.redirect('/studentdashboard')
-        }
-    })
-})
-
 
 app.post('/signin', (req, res) => {
     var username = req.body.username;
