@@ -1,14 +1,14 @@
-<div class="form">
-    <h2>STUDENT FORM</h2>
-        <form class="form">
-          <div class="mb-3">
-            <label for="RoomNo" class="form-label">ROOM NUMBER</label>
-            <input type="number" class="form-control" name="RoomNo" id="RoomNo" required/>
+<div class="">
+  <form class="form" action="/admin/registerrooms" method="post">
+    <h3>Register Rooms</h3>
+    <div class="mb-3">
+      <label for="RoomNo" class="form-label">ROOM NUMBER</label>
+      <input type="text" class="form-control" name="RoomNo" id="RoomNo" required />
 
-            <label for="HostelNo" class="form-label">HOSTEL NUMBER</label>
-            <input type="text" class="form-control" name="HostelNo" id="HostelNo" required/>
+      <label for="HostelNo" class="form-label">HOSTEL NUMBER</label>
+      <input type="text" class="form-control" name="HostelNo" id="HostelNo" required />
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </div>
+  </form>
 </div>
