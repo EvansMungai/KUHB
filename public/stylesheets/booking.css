@@ -21,7 +21,10 @@ body {
     font-weight: bold;
 }
 
-
+button a{
+    text-decoration: none;
+    color: white;
+}
 .form-label {
     text-align: left;
     color: 080F0F;
