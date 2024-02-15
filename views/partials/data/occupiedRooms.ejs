@@ -1,0 +1,25 @@
+<div class="form">
+  <h3>Allocate Rooms</h3>
+    <table class="table table-striped table-responsive">
+        <thead>
+          <tr>
+              <th scope="col">Room Number</th>
+              <th scope="col">Registration Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (sampleData.length > 0){ %>
+              <% sampleData.forEach((data)=>{ %>
+                  <tr>
+                    <td><%= data.RoomNo %></td>
+                    <td><%= data.RegistrationNo %></td>
+                  </tr>
+                <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="4">No Data Found</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+</div>

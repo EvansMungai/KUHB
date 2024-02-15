@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="form">
+    <% if (sampleData.length> 0){ %>
+      <% sampleData.forEach((data)=>{ %>
+        <h3>Application Details</h3>
+        <form class="" action="/matron/reviewallocations/<%= data.ApplicationNo %>" method="post">
+          <div class="mb-3">
+            <label for="RegistrationNo" class="form-label">Registration Number:</label>
+            <input type="text" name="RegNo" class="form-control" id="RegistrationNo" disabled
+              placeholder="<%= data.ApplicationNo %>" />
+          </div>
+          <div class="mb-3">
+            <label for="hostel-name" class="form-label">Hostel Name:</label>
+            <input type="text" name="HostelName" class="form-control" id="hostel-name" disabled
+              placeholder="<%= data.PreferredHostel %>" />
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="ApplicationPeriod" class="form-label">Application Period:</label>
+              <input type="number" name="ApplicationPeriod" class="form-control" id="ApplicationPeriod" disabled
+                placeholder="<%= data.ApplicationPeriod %>" />
+            </div>
+          </div>
+      <% }) %>
+      <% } else { %>
+          <textarea type="text" name="ReasonsForConsideration" class="form-control" id="ReasonsForConsideration"
+          disabled placeholder="Data not found"></textarea>
+      <% } %>
+      <label for="RoomNo" class="form-label">Allocate Room</label>
+      <select id="RoomNo" name="RoomNo" size="1" class="form-select mb-3">
+        <option value="Pending" selected disabled>(select one)</option>
+        <% roomsData.forEach((data)=>{ %>
+        <option value="<%= data.RoomNo %>"><%= data.RoomNo %></option>
+        <% }) %>
+      </select>
+      <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+  </div>
+</div>
