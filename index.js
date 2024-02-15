@@ -12,47 +12,7 @@ require('./server/routes/adminDashboard')(app);
 require('./server/routes/housekeeperDashboard')(app);
 require('./server/routes/matronDashboard')(app);
 require('./server/routes/studentDashboard')(app);
-
-app.get('/login', (req, res) => {
-    res.render('./layouts/login', {
-        pageTitle: "Log In"
-    });
-})
-app.get('/signin', (req, res) => {
-    res.render('./layouts/sign', {
-        pageTitle: "Sign In"
-    });
-})
-
-app.post('/signin', (req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
-    let params = {
-        Username: username,
-        Password: password
-    }
-    db.query('insert into users set?', params, (err, result) => {
-        if (err) {
-            throw err;
-        } else {
-            res.redirect('/studentdashboard');
-        }
-    })
-});
-
-// app.get('/login', (req, res) => {
-//     res.render('./layouts/login', {
-//         pageTitle: "Log in"
-//     })
-// })
-
-app.post('/login', (req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
-    console.log(username);
-    console.log(password);
-    res.send("We have received your data");
-})
+require('./server/routes/authentication')(app);
 
 app.listen(port, (err) => {
     if (err) {
