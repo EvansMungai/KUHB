@@ -1,6 +1,6 @@
 const db = require('../config/database');
 exports.showSuccessfulApplications = async (req, res) => {
-    db.query('select * from applications where status = "Successful"', (err, result) => {
+    db.query('select * from applications where status = "Accepted"', (err, result) => {
         if (err) {
             return err;
         } else {
@@ -15,7 +15,7 @@ exports.showSuccessfulApplications = async (req, res) => {
     })
 }
 exports.allocateRooms = async (req, res) => {
-    db.query('select * from applications where status = "Successful"', (err, result) => {
+    db.query('select * from applications where status = "Accepted"', (err, result) => {
         if (err) {
             return err;
         } else {

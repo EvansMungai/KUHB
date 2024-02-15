@@ -5,23 +5,8 @@
         <th scope="col">#</th>
         <th scope="col">Period</th>
         <th scope="col">Student</th>
-        <!-- <th scope="col">Room </th> -->
-        <!-- <th scope="col">Status</th> -->
-        <th scope="col">Disability</th>
-        <!-- <th scope="col">Disability Details</th> -->
-        <!-- <th scope="col">Accommodated?</th> -->
-        <!-- <th scope="col">Accommodated Period</th> -->
-        <!-- <th scope="col">Is Sponsored?</th> -->
-        <th scope="col">Sponsor</th>
-        <th scope="col">Helb?</th>
-        <!-- <th scope="col">Helb Amount</th> -->
-        <th scope="col">Bursary?</th>
-        <!-- <th scope="col">Bursary Amount</th> -->
-        <th scope="col">Work Study?</th>
-        <!-- <th scope="col">Work Study Period</th> -->
-        <!-- <th scope="col">Special Exams?</th> -->
-        <!-- <th scope="col">Special Exam Period</th> -->
-        <!-- <th scope="col">Reasons for Consideration</th> -->
+        <th scope="col">Status</th>
+        <th scope="col">Hostel</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -38,59 +23,14 @@
             <td>
               <%= data.RegistrationNo %>
             </td>
-            <!-- <td>
+            <td>
               <%= data.Status %>
-            </td> -->
-            <!-- <td>
-              <%= data.RoomNo %>
-            </td> -->
-            <td>
-              <%= data.Disability %>
             </td>
-            <!-- <td>
-              <%= data.DisabilityDetails %>
-            </td> -->
-            <!-- <td>
-              <%= data.AccommodatedBefore %>
-            </td> -->
-            <!-- <td>
-              <%= data.AccommodationPeriod %>
-            </td> -->
             <td>
-              <%= data.IsSponsored %>
+              <%= data.PreferredHostel %>
             </td>
-            <!-- <td>
-              <%= data.Sponsor %>
-            </td> -->
             <td>
-              <%= data.ReceivesHelb %>
-            </td>
-            <!-- <td>
-              <%= data.HelbAmount %>
-            </td> -->
-            <td>
-              <%= data.ReceivedBursary %>
-            </td>
-            <!-- <td>
-              <%= data.BursaryAmount %>
-            </td> -->
-            <td>
-              <%= data.WorkStudyBenefitsBefore %>
-            </td>
-            <!-- <td>
-              <%= data.WorkStudyPeriod %>
-            </td> -->
-            <!-- <td>
-              <%= data.SpecialExamsOnFinancialGrounds %>
-            </td> -->
-            <!-- <td>
-              <%= data.SpecialExamPeriod %>
-            </td> -->
-            <!-- <td>
-              <%= data.ReasonsForConsideration %>
-            </td> -->
-            <td>
-              <button type="button" class="btn btn-primary btn-sm"><a href="/housekeeper/viewapplications/<%= data.ApplicationNo %>">View</a></button>
+              <button type="button" class="btn btn-primary btn-sm"><a href="/housekeeper/viewapplications/<%= data.ApplicationNo %>">Review</a></button>
             </td>
           </tr>
           <% }) %>
