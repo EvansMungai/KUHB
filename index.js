@@ -14,6 +14,9 @@ require('./server/routes/matronDashboard')(app);
 require('./server/routes/studentDashboard')(app);
 require('./server/routes/authentication')(app);
 
+app.get('/', (req, res)=>{
+    res.sendFile(__dirname + '/src/index.html');
+})
 app.listen(port, (err) => {
     if (err) {
         console.log(err);
