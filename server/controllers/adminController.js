@@ -22,6 +22,17 @@ exports.registerHostels = async (req, res)=>{
         }
     })
 }
+exports.showHostels = async (req, res) => {
+    db.query('select * from hostels', (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            res.render('./layouts/adminDashboard', {
+                sampleData: result,
+            })
+        }
+    })
+}
 exports.roomsRegistrationForm = async (req, res)=>{
     res.render('./layouts/adminRegisterRooms');
 }
@@ -40,17 +51,6 @@ exports.registerRooms = async (req, res)=>{
         }
     })
 }
-exports.showHostels = async (req, res) => {
-    db.query('select * from hostels', (err, result) => {
-        if (err) {
-            return err;
-        } else {
-            res.render('./layouts/adminDashboard', {
-                sampleData: result,
-            })
-        }
-    })
-}
 exports.showRooms = async (req, res)=>{
     db.query('select * from rooms', (err, result)=>{
         if (err) {
@@ -59,6 +59,30 @@ exports.showRooms = async (req, res)=>{
             res.render('./layouts/adminDashboardRooms', {
                 sampleData: result,
             })
+        }
+    })
+}
+exports.studentsRegistrationForm = async (req,res)=>{
+    res.render('./layouts/adminRegisterStudents');
+}
+exports.registerStudents = async (req, res)=>{
+    var registrationNo = req.body.RegistrationNo;
+    var surname = req.body.Surname;
+    var firstName = req.body.FirstName;
+    var secondName = req.body.SecondName;
+    var gender = req.body.gender;
+    let params = {
+        RegNO: registrationNo,
+        Surname: surname,
+        FirstName: firstName,
+        SecondName: secondName,
+        Gender: gender
+    }
+    db.query('insert into students set?', params, (err, result)=>{
+        if (err) {
+            throw err
+        } else {
+            res.redirect('/admin/students')
         }
     })
 }

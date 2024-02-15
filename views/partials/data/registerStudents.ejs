@@ -1,18 +1,18 @@
 <div class="form">
-    <h2>STUDENT FORM</h2>
-    <form class="form">
+    <h2>STUDENT REGISTRATION FORM</h2>
+    <form class="" action="/admin/registerstudents" method="post">
         <div class="mb-3">
             <label for="RegistrationNo" class="form-label">REGISTRATION NUMBER</label>
-            <input type="text" class="form-control" id="RegistrationNo" required />
+            <input type="text" class="form-control" name="RegistrationNo" id="RegistrationNo" required />
 
             <label for="Surname" class="form-label">SURNAME</label>
-            <input type="text" class="form-control" id="Surname" required />
+            <input type="text" class="form-control" name="Surname" id="Surname" required />
 
             <label for="First Name" class="form-label">FIRSTNAME</label>
-            <input type="text" class="form-control" id="First Name" required />
+            <input type="text" class="form-control" name="FirstName" id="First Name" required />
 
             <label for="Second Name" class="form-label">SECONDNAME</label>
-            <input type="text" class="form-control" id="Second Name" required />
+            <input type="text" class="form-control" name="SecondName" id="Second Name" required />
 
             <label for="gender" class="form-label">Gender</label>
             <select id="gender" name="gender" size="1" class="form-select">
