@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bycrpt = require('bcrypt');
 const app = express();
 const port = 3000;
 const db = require('./server/config/database');
@@ -14,7 +15,7 @@ require('./server/routes/matronDashboard')(app);
 require('./server/routes/studentDashboard')(app);
 require('./server/routes/authentication')(app);
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/src/index.html');
 })
 app.listen(port, (err) => {

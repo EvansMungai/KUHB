@@ -3,4 +3,6 @@ const authenticationController = require('../controllers/authenticationControlle
 module.exports = (app)=>{
     app.get('/signin', authenticationController.showSigninPage);
     app.get('/login', authenticationController.showLoginPage);
+    app.post('/signin', authenticationController.createUser);
+    app.post('/login', authenticationController.authenticateUser);
 }
