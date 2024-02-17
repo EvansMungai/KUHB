@@ -1,6 +1,5 @@
 const db = require('../config/database');
 const bycrpt = require('bcrypt');
-const adminDashboard = require('../routes/adminDashboard');
 
 exports.showSigninPage = async (req, res) => {
     res.render('./layouts/signin', {
