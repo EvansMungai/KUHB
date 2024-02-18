@@ -16,6 +16,9 @@ require('./server/routes/authentication')(app);
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/src/index.html');
 })
+app.get('/logout', (req, res)=>{
+    res.redirect('/');
+})
 app.listen(port, (err) => {
     if (err) {
         console.log(err);
