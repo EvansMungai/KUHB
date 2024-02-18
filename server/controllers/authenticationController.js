@@ -51,7 +51,22 @@ exports.authenticateUser = async (req, res) => {
             const retrievedRole = result.map(data => data.Role);
             const userRole = retrievedRole.toString();
             if (await bycrpt.compare(password, hashedPassword)) {
-                res.send('Correct password')
+                switch (userRole) {
+                    case "Admin":
+                        res.redirect('/admin')
+                        break;
+                    case "Student":
+                        res.redirect('/student')
+                        break;
+                    case "Housekeeper":
+                        res.redirect('/housekeeper')
+                        break;
+                    case "Matron":
+                        res.redirect('/matron')
+                        break;
+                    default:
+                        break;
+                }
             } else {
                 res.send('Invalid password')
             }
