@@ -108,3 +108,29 @@ exports.showUsers = async (req, res)=>{
         }
     })
 }
+exports.showUserDetails = async (req, res)=>{
+    var id = req.params.id;
+    db.query('select * from users where Username=?', id, (err, result)=>{
+        if (err) {
+            throw err
+        } else {
+            res.render('./layouts/adminUpdateUserRole', {
+                sampleData: result
+            });
+        }
+    })
+}
+exports.changeRoles = async (req, res)=>{
+    var id = req.params.username;
+    var role = req.body.role;
+    let params = {
+        Role: role
+    }
+    db.query('update users set? where Username = ?;', [params, id], (err, result)=>{
+        if (err) {
+            throw err
+        } else {
+            res.redirect('/admin/users')
+        }
+    })
+}
