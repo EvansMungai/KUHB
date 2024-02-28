@@ -17,7 +17,7 @@ exports.showApplications = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
@@ -41,7 +41,7 @@ exports.viewApplications = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -75,7 +75,7 @@ exports.reviewApplictions = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -98,7 +98,7 @@ exports.showSuccessfulApplications = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');

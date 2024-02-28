@@ -12,18 +12,11 @@ exports.homepage = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
     }
-}
-exports.postBookingData = async (req, res) => {
-    var hostelName = req.body.hostelName;
-    var room = req.body.room;
-    res.render('./layouts/application')
-    console.log(hostelName);
-    console.log(room);
 }
 exports.application = async (req, res) => {
     if (req.session.user) {
@@ -38,58 +31,66 @@ exports.application = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
     }
 }
 exports.sendApplication = async (req, res) => {
-    var registrationNo = req.body.RegNo;
-    var applicationPeriod = req.body.ApplicationPeriod;
-    var preferredHostel = req.body.hostelName;
-    var disabled = req.body.isDisabled;
-    var disabilityDetails = req.body.DisabilityDetails;
-    var accommodationBefore = req.body.accommodationBefore;
-    var accommodationPeriod = req.body.AccommodationPeriod;
-    var sponsored = req.body.IsSponsored;
-    var sponsor = req.body.sponsor;
-    var receivesHelb = req.body.ReceivesHelb;
-    var helbAmount = req.body.HelbAmount;
-    var receivedBursary = req.body.ReceivedBursary;
-    var bursaryAmount = req.body.BursaryAmount;
-    var workStudyBenefitsBefore = req.body.WorkStudyBenefitsBefore;
-    var workStudyPeriod = req.body.WorkStudyPeriod;
-    var specialExamsOnFinancialGrounds = req.body.deferred;
-    var specialExamsPeriod = req.body.SpecialExamPeriod;
-    var reasonsForConsideration = req.body.ReasonsForConsideration;
-    let params = {
-        ApplicationPeriod: applicationPeriod,
-        RegistrationNo: registrationNo,
-        PreferredHostel: preferredHostel,
-        Disability: disabled,
-        DisabilityDetails: disabilityDetails,
-        AccommodatedBefore: accommodationBefore,
-        AccommodationPeriod: accommodationPeriod,
-        IsSponsored: sponsored,
-        Sponsor: sponsor,
-        ReceivesHelb: receivesHelb,
-        HelbAmount: helbAmount,
-        ReceivedBursary: receivedBursary,
-        BursaryAmount: bursaryAmount,
-        WorkStudyBenefitsBefore: workStudyBenefitsBefore,
-        WorkStudyPeriod: workStudyPeriod,
-        SpecialExamsOnFinancialGrounds: specialExamsOnFinancialGrounds,
-        SpecialExamPeriod: specialExamsPeriod,
-        ReasonsForConsideration: reasonsForConsideration
-    }
-    db.query('insert into applications set?', params, (err, result) => {
-        if (err) {
-            throw err;
+    if (req.session.user) {
+        if (req.sesssion.role === "Student") {
+            var registrationNo = req.body.RegNo;
+            var applicationPeriod = req.body.ApplicationPeriod;
+            var preferredHostel = req.body.hostelName;
+            var disabled = req.body.isDisabled;
+            var disabilityDetails = req.body.DisabilityDetails;
+            var accommodationBefore = req.body.accommodationBefore;
+            var accommodationPeriod = req.body.AccommodationPeriod;
+            var sponsored = req.body.IsSponsored;
+            var sponsor = req.body.sponsor;
+            var receivesHelb = req.body.ReceivesHelb;
+            var helbAmount = req.body.HelbAmount;
+            var receivedBursary = req.body.ReceivedBursary;
+            var bursaryAmount = req.body.BursaryAmount;
+            var workStudyBenefitsBefore = req.body.WorkStudyBenefitsBefore;
+            var workStudyPeriod = req.body.WorkStudyPeriod;
+            var specialExamsOnFinancialGrounds = req.body.deferred;
+            var specialExamsPeriod = req.body.SpecialExamPeriod;
+            var reasonsForConsideration = req.body.ReasonsForConsideration;
+            let params = {
+                ApplicationPeriod: applicationPeriod,
+                RegistrationNo: registrationNo,
+                PreferredHostel: preferredHostel,
+                Disability: disabled,
+                DisabilityDetails: disabilityDetails,
+                AccommodatedBefore: accommodationBefore,
+                AccommodationPeriod: accommodationPeriod,
+                IsSponsored: sponsored,
+                Sponsor: sponsor,
+                ReceivesHelb: receivesHelb,
+                HelbAmount: helbAmount,
+                ReceivedBursary: receivedBursary,
+                BursaryAmount: bursaryAmount,
+                WorkStudyBenefitsBefore: workStudyBenefitsBefore,
+                WorkStudyPeriod: workStudyPeriod,
+                SpecialExamsOnFinancialGrounds: specialExamsOnFinancialGrounds,
+                SpecialExamPeriod: specialExamsPeriod,
+                ReasonsForConsideration: reasonsForConsideration
+            }
+            db.query('insert into applications set?', params, (err, result) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.redirect('/student')
+                }
+            })
         } else {
-            res.redirect('/student')
+            res.render("./layouts/unauthorizedAccess");
         }
-    })
+    } else {
+        res.redirect('/login');
+    }
 }
 exports.applicationDetails = async (req, res) => {
     if (req.sesssion.user) {
@@ -104,7 +105,7 @@ exports.applicationDetails = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
@@ -123,20 +124,9 @@ exports.accommodationDetails = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.redirect('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
     }
 }
-// exports.userDetails = async (req, res)=>{
-//     db.query('select * from users', (err, result)=>{
-//         if (err) {
-//             return err;
-//         } else {
-//             res.render('./layouts/studentdashboard', {
-//                 sampleData: result
-//             })
-//         }
-//     })
-// }

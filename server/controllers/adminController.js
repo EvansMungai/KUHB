@@ -5,7 +5,7 @@ exports.hostelsRegistrationForm = async (req, res) => {
         if (req.session.role === "Admin") {
             res.render('./layouts/adminRegisterHostels');
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -32,7 +32,7 @@ exports.registerHostels = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     }
 }
@@ -49,7 +49,7 @@ exports.showHostels = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -83,7 +83,7 @@ exports.registerRooms = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     }
 }
@@ -100,7 +100,7 @@ exports.showRooms = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -140,7 +140,7 @@ exports.registerStudents = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -159,7 +159,7 @@ exports.showStudents = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
@@ -178,7 +178,7 @@ exports.showUsers = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -198,7 +198,7 @@ exports.showUserDetails = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -220,7 +220,9 @@ exports.changeRoles = async (req, res) => {
                 }
             })
         } else {
-            res.send("Unauthorized access")
+            res.render('./layouts/unauthorizedAccess')
         }
+    } else {
+        res.redirect('/login')
     }
 }
