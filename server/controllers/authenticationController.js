@@ -23,12 +23,21 @@ exports.createUser = async (req, res) => {
             if (err) {
                 throw err
             } else {
-                db.query('select * from students', (err, result) => {
-                    if (err) {
-                        return err;
+                db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
+                    if (result.length === 0) {
+                        res.redirect('/student/registration')
                     } else {
-                        res.render('./layouts/studentdashboard', {
-                            sampleData: result,
+                        const userRegNo = result.map(data => {
+                            return data.RegNO;
+                        })
+                        db.query('select * from students where RegNO=?', userRegNo, (err, result) => {
+                            if (err) {
+                                return err;
+                            } else {
+                                res.render('./layouts/studentdashboard', {
+                                    sampleData: result,
+                                })
+                            }
                         })
                     }
                 })

@@ -2,12 +2,21 @@ const db = require('../config/database');
 exports.homepage = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Student") {
-            db.query('select * from students', (err, result) => {
-                if (err) {
-                    return err;
+            db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
+                if (result.length === 0) {
+                    res.redirect('/student/registration')
                 } else {
-                    res.render('./layouts/studentdashboard', {
-                        sampleData: result,
+                    const userRegNo = result.map(data => {
+                        return data.RegNO;
+                    })
+                    db.query('select * from students where RegNO=?', userRegNo, (err, result) => {
+                        if (err) {
+                            return err;
+                        } else {
+                            res.render('./layouts/studentdashboard', {
+                                sampleData: result,
+                            })
+                        }
                     })
                 }
             })
