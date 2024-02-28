@@ -86,7 +86,7 @@ exports.allocateRoom = async (req, res) => {
 exports.viewAllocatedRooms = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Matron") {
-            db.query('select RegistrationNo, RoomNo from applications', (err, result) => {
+            db.query('select RegistrationNo, RoomNo from applications where RoomNo is not null', (err, result) => {
                 if (err) {
                     throw err
                 } else {

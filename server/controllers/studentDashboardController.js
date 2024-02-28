@@ -30,13 +30,23 @@ exports.homepage = async (req, res) => {
 exports.application = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Student") {
-            db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
+            db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
                 if (err) {
-                    return err;
+                    throw err
                 } else {
-                    res.render('./layouts/application', {
-                        sampleData: result,
-                    })
+                    if (result.length === 0) {
+                        db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
+                            if (err) {
+                                return err;
+                            } else {
+                                res.render('./layouts/application', {
+                                    sampleData: result,
+                                })
+                            }
+                        })
+                    } else {
+                        res.redirect('/student/applicationdetails')
+                    }
                 }
             })
         } else {
@@ -109,7 +119,7 @@ exports.updateDetailsForm = async (req, res) => {
 }
 exports.sendApplication = async (req, res) => {
     if (req.session.user) {
-        if (req.sesssion.role === "Student") {
+        if (req.session.role === "Student") {
             var registrationNo = req.body.RegNo;
             var applicationPeriod = req.body.ApplicationPeriod;
             var preferredHostel = req.body.hostelName;
@@ -152,7 +162,7 @@ exports.sendApplication = async (req, res) => {
                 if (err) {
                     throw err;
                 } else {
-                    res.redirect('/student')
+                    res.redirect('/student/applicationdetails')
                 }
             })
         } else {
@@ -165,12 +175,25 @@ exports.sendApplication = async (req, res) => {
 exports.applicationDetails = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Student") {
-            db.query('select * from applications', (err, result) => {
-                if (err) {
-                    return err;
+            db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
+                if (result.length === 0) {
+                    res.redirect('/student/registration')
                 } else {
-                    res.render('./layouts/studentApplicationDetails', {
-                        sampleData: result
+                    const userRegNo = result.map(data => {
+                        return data.RegNO;
+                    })
+                    db.query('select applications.ApplicationNo, students.RegNO, applications.Status from applications left join students on students.RegNO = applications.RegistrationNo where students.RegNO= ?', userRegNo, (err, result) => {
+                        if (err) {
+                            return err;
+                        } else {
+                            if (result.length === 0) {
+                                res.redirect('/student/application')
+                            } else {
+                                res.render('./layouts/studentApplicationDetails', {
+                                    sampleData: result
+                                })
+                            }
+                        }
                     })
                 }
             })
@@ -184,12 +207,21 @@ exports.applicationDetails = async (req, res) => {
 exports.accommodationDetails = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Student") {
-            db.query('select * from applications where status = "Accepted"', (err, result) => {
-                if (err) {
-                    return err;
+            db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
+                if (result.length === 0) {
+                    res.redirect('/student/registration')
                 } else {
-                    res.render('./layouts/studentAccommodationDetails', {
-                        sampleData: result
+                    const userRegNo = result.map(data => {
+                        return data.RegNO;
+                    })
+                    db.query('select * from applications where RegistrationNo = ?', userRegNo, (err, result) => {
+                        if (err) {
+                            return err;
+                        } else {
+                            res.render('./layouts/studentAccommodationDetails', {
+                                sampleData: result
+                            })
+                        }
                     })
                 }
             })
