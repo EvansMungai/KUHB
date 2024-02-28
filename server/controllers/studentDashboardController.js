@@ -1,15 +1,19 @@
 const db = require('../config/database');
 exports.homepage = async (req, res) => {
     if (req.session.user) {
-        db.query('select * from students', (err, result) => {
-            if (err) {
-                return err;
-            } else {
-                res.render('./layouts/studentdashboard', {
-                    sampleData: result,
-                })
-            }
-        })
+        if (req.session.role === "Student") {
+            db.query('select * from students', (err, result) => {
+                if (err) {
+                    return err;
+                } else {
+                    res.render('./layouts/studentdashboard', {
+                        sampleData: result,
+                    })
+                }
+            })
+        } else {
+            res.send("Unauthorized access")
+        }
     } else {
         res.redirect('/login');
     }
@@ -23,15 +27,19 @@ exports.postBookingData = async (req, res) => {
 }
 exports.application = async (req, res) => {
     if (req.session.user) {
-        db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
-            if (err) {
-                return err;
-            } else {
-                res.render('./layouts/application', {
-                    sampleData: result,
-                })
-            }
-        })
+        if (req.session.role === "Student") {
+            db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
+                if (err) {
+                    return err;
+                } else {
+                    res.render('./layouts/application', {
+                        sampleData: result,
+                    })
+                }
+            })
+        } else {
+            res.send("Unauthorized access")
+        }
     } else {
         res.redirect('/login');
     }
@@ -85,30 +93,38 @@ exports.sendApplication = async (req, res) => {
 }
 exports.applicationDetails = async (req, res) => {
     if (req.sesssion.user) {
-        db.query('select * from applications', (err, result) => {
-            if (err) {
-                return err;
-            } else {
-                res.render('./layouts/studentApplicationDetails', {
-                    sampleData: result
-                })
-            }
-        })
+        if (req.session.role === "Student") {
+            db.query('select * from applications', (err, result) => {
+                if (err) {
+                    return err;
+                } else {
+                    res.render('./layouts/studentApplicationDetails', {
+                        sampleData: result
+                    })
+                }
+            })
+        } else {
+            res.send("Unauthorized access")
+        }
     } else {
         res.redirect('/login');
     }
 }
 exports.accommodationDetails = async (req, res) => {
     if (req.session.user) {
-        db.query('select * from applications where status = "Accepted"', (err, result) => {
-            if (err) {
-                return err;
-            } else {
-                res.render('./layouts/studentAccommodationDetails', {
-                    sampleData: result
-                })
-            }
-        })
+        if (req.session.role === "Student") {
+            db.query('select * from applications where status = "Accepted"', (err, result) => {
+                if (err) {
+                    return err;
+                } else {
+                    res.render('./layouts/studentAccommodationDetails', {
+                        sampleData: result
+                    })
+                }
+            })
+        } else {
+            res.send("Unauthorized access")
+        }
     } else {
         res.redirect('/login')
     }
