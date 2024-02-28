@@ -34,19 +34,15 @@ exports.application = async (req, res) => {
                 if (err) {
                     throw err
                 } else {
-                    if (result.length === 0) {
-                        db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
-                            if (err) {
-                                return err;
-                            } else {
-                                res.render('./layouts/application', {
-                                    sampleData: result,
-                                })
-                            }
-                        })
-                    } else {
-                        res.redirect('/student/applicationdetails')
-                    }
+                    db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
+                        if (err) {
+                            return err;
+                        } else {
+                            res.render('./layouts/application', {
+                                sampleData: result,
+                            })
+                        }
+                    })
                 }
             })
         } else {
@@ -176,27 +172,20 @@ exports.applicationDetails = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Student") {
             db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
-                if (result.length === 0) {
-                    res.redirect('/student/registration')
-                } else {
-                    const userRegNo = result.map(data => {
-                        return data.RegNO;
-                    })
-                    db.query('select applications.ApplicationNo, students.RegNO, applications.Status from applications left join students on students.RegNO = applications.RegistrationNo where students.RegNO= ?', userRegNo, (err, result) => {
-                        if (err) {
-                            return err;
-                        } else {
-                            if (result.length === 0) {
-                                res.redirect('/student/application')
-                            } else {
-                                res.render('./layouts/studentApplicationDetails', {
-                                    sampleData: result
-                                })
-                            }
-                        }
-                    })
-                }
-            })
+                const userRegNo = result.map(data => {
+                    return data.RegNO;
+                })
+                db.query('select applications.ApplicationNo, students.RegNO, applications.Status from applications left join students on students.RegNO = applications.RegistrationNo where students.RegNO= ?', userRegNo, (err, result) => {
+                    if (err) {
+                        return err;
+                    } else {
+                        res.render('./layouts/studentApplicationDetails', {
+                            sampleData: result
+                        })
+                    }
+                })
+            }
+            )
         } else {
             res.render('./layouts/unauthorizedAccess')
         }
