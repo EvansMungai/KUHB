@@ -1,9 +1,13 @@
 const db = require('../config/database');
 
-exports.hostelsRegistrationForm = async (req,res)=>{
-    res.render('./layouts/adminRegisterHostels');
+exports.hostelsRegistrationForm = async (req, res) => {
+    if (req.session.user) {
+        res.render('./layouts/adminRegisterHostels');
+    } else {
+        res.redirect('/login')
+    }
 }
-exports.registerHostels = async (req, res)=>{
+exports.registerHostels = async (req, res) => {
     var hostelNo = req.body.HostelNo;
     var hostelName = req.body.HostelName;
     var capacity = req.body.Capacity;
@@ -14,7 +18,7 @@ exports.registerHostels = async (req, res)=>{
         Capacity: capacity,
         Type: type
     }
-    db.query('insert into hostels set?', params, (err, result)=>{
+    db.query('insert into hostels set?', params, (err, result) => {
         if (err) {
             throw err
         } else {
@@ -23,27 +27,35 @@ exports.registerHostels = async (req, res)=>{
     })
 }
 exports.showHostels = async (req, res) => {
-    db.query('select * from hostels', (err, result) => {
-        if (err) {
-            return err;
-        } else {
-            res.render('./layouts/adminDashboard', {
-                sampleData: result,
-            })
-        }
-    })
+    if (req.session.user) {
+        db.query('select * from hostels', (err, result) => {
+            if (err) {
+                return err;
+            } else {
+                res.render('./layouts/adminDashboard', {
+                    sampleData: result,
+                })
+            }
+        })
+    } else {
+        res.redirect('/login')
+    }
 }
-exports.roomsRegistrationForm = async (req, res)=>{
-    res.render('./layouts/adminRegisterRooms');
+exports.roomsRegistrationForm = async (req, res) => {
+    if (req.session.user) {
+        res.render('./layouts/adminRegisterRooms');
+    } else {
+        res.redirect('/login')
+    }
 }
-exports.registerRooms = async (req, res)=>{
+exports.registerRooms = async (req, res) => {
     var roomNo = req.body.RoomNo;
     var hostelNo = req.body.HostelNo;
     let params = {
         RoomNo: roomNo,
         HostelNo: hostelNo
     }
-    db.query('insert into rooms set?', params, (err, result)=>{
+    db.query('insert into rooms set?', params, (err, result) => {
         if (err) {
             throw err
         } else {
@@ -51,21 +63,29 @@ exports.registerRooms = async (req, res)=>{
         }
     })
 }
-exports.showRooms = async (req, res)=>{
-    db.query('select * from rooms', (err, result)=>{
-        if (err) {
-            throw err;
-        } else {
-            res.render('./layouts/adminDashboardRooms', {
-                sampleData: result,
-            })
-        }
-    })
+exports.showRooms = async (req, res) => {
+    if (req.session.user) {
+        db.query('select * from rooms', (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                res.render('./layouts/adminDashboardRooms', {
+                    sampleData: result,
+                })
+            }
+        })
+    } else {
+        res.redirect('/login')
+    }
 }
-exports.studentsRegistrationForm = async (req,res)=>{
-    res.render('./layouts/adminRegisterStudents');
+exports.studentsRegistrationForm = async (req, res) => {
+    if (req.session.user) {
+        res.render('./layouts/adminRegisterStudents');
+    } else {
+        res.redirect('/login')
+    }
 }
-exports.registerStudents = async (req, res)=>{
+exports.registerStudents = async (req, res) => {
     var registrationNo = req.body.RegistrationNo;
     var surname = req.body.Surname;
     var firstName = req.body.FirstName;
@@ -78,7 +98,7 @@ exports.registerStudents = async (req, res)=>{
         SecondName: secondName,
         Gender: gender
     }
-    db.query('insert into students set?', params, (err, result)=>{
+    db.query('insert into students set?', params, (err, result) => {
         if (err) {
             throw err
         } else {
@@ -86,47 +106,59 @@ exports.registerStudents = async (req, res)=>{
         }
     })
 }
-exports.showStudents = async (req, res)=>{
-    db.query('select * from students', (err, result)=>{
-        if (err) {
-            throw err;
-        } else {
-            res.render('./layouts/adminDashboardStudents', {
-                sampleData: result,
-            })
-        }
-    })
+exports.showStudents = async (req, res) => {
+    if (req.session.user) {
+        db.query('select * from students', (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                res.render('./layouts/adminDashboardStudents', {
+                    sampleData: result,
+                })
+            }
+        })
+    } else {
+        res.redirect('/login');
+    }
 }
-exports.showUsers = async (req, res)=>{
-    db.query('select * from users', (err, result)=>{
-        if (err) {
-            throw err;
-        } else {
-            res.render('./layouts/adminDashboardUsers', {
-                sampleData: result,
-            })
-        }
-    })
+exports.showUsers = async (req, res) => {
+    if (req.session.user) {
+        db.query('select * from users', (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                res.render('./layouts/adminDashboardUsers', {
+                    sampleData: result,
+                })
+            }
+        })
+    } else {
+        res.redirect('/login')
+    }
 }
-exports.showUserDetails = async (req, res)=>{
-    var id = req.params.id;
-    db.query('select * from users where Username=?', id, (err, result)=>{
-        if (err) {
-            throw err
-        } else {
-            res.render('./layouts/adminUpdateUserRole', {
-                sampleData: result
-            });
-        }
-    })
+exports.showUserDetails = async (req, res) => {
+    if (req.session.user) {
+        var id = req.params.id;
+        db.query('select * from users where Username=?', id, (err, result) => {
+            if (err) {
+                throw err
+            } else {
+                res.render('./layouts/adminUpdateUserRole', {
+                    sampleData: result
+                });
+            }
+        })
+    } else{
+        res.redirect('/login')
+    }
 }
-exports.changeRoles = async (req, res)=>{
+exports.changeRoles = async (req, res) => {
     var id = req.params.username;
     var role = req.body.role;
     let params = {
         Role: role
     }
-    db.query('update users set? where Username = ?;', [params, id], (err, result)=>{
+    db.query('update users set? where Username = ?;', [params, id], (err, result) => {
         if (err) {
             throw err
         } else {

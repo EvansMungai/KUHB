@@ -51,6 +51,7 @@ exports.authenticateUser = async (req, res) => {
             const retrievedRole = result.map(data => data.Role);
             const userRole = retrievedRole.toString();
             if (await bycrpt.compare(password, hashedPassword)) {
+                req.session.user= username;
                 switch (userRole) {
                     case "Admin":
                         res.redirect('/admin')

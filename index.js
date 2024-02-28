@@ -1,9 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const app = express();
 const port = 3000;
 
 app.set('view engine', 'ejs');
+app.use(session({
+    secret: 'mysecret',
+    resave: false,
+    saveUninitialized: true
+}))
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
