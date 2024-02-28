@@ -5,4 +5,5 @@ module.exports = (app)=>{
     app.get('/login', authenticationController.showLoginPage);
     app.post('/signin', authenticationController.createUser);
     app.post('/login', authenticationController.authenticateUser);
+    app.get('/logout', authenticationController.logoutUser)
 }

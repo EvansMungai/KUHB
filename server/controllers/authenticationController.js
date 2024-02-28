@@ -51,7 +51,7 @@ exports.authenticateUser = async (req, res) => {
             const retrievedRole = result.map(data => data.Role);
             const userRole = retrievedRole.toString();
             if (await bycrpt.compare(password, hashedPassword)) {
-                req.session.user= username;
+                req.session.user = username;
                 switch (userRole) {
                     case "Admin":
                         res.redirect('/admin')
@@ -73,6 +73,15 @@ exports.authenticateUser = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
+        }
+    })
+}
+exports.logoutUser = async (req, res) => {
+    req.session.destroy((err)=>{
+        if (err) {
+            throw err
+        } else {
+            res.redirect('/')
         }
     })
 }
