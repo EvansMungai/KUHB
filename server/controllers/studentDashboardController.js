@@ -12,7 +12,7 @@ exports.homepage = async (req, res) => {
                 }
             })
         } else {
-            res.redirect('./layouts/unauthorizedAccess')
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
@@ -31,10 +31,71 @@ exports.application = async (req, res) => {
                 }
             })
         } else {
-            res.redirect('./layouts/unauthorizedAccess')
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
+    }
+}
+exports.studentsRegistrationForm = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.role === "Student") {
+            res.render('./layouts/studentRegistration');
+        } else {
+            res.send("Unauthorized access")
+        }
+    } else {
+        res.redirect('/login')
+    }
+}
+exports.registration = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.role === "Student") {
+            var registrationNo = req.body.RegistrationNo;
+            var surname = req.body.Surname;
+            var firstName = req.body.FirstName;
+            var secondName = req.body.SecondName;
+            var gender = req.body.gender;
+            let params = {
+                RegNO: registrationNo,
+                Surname: surname,
+                FirstName: firstName,
+                SecondName: secondName,
+                Gender: gender
+            }
+            db.query('insert into students set?', params, (err, result) => {
+                if (err) {
+                    throw err
+                } else {
+                    let userUpdate = {
+                        RegNO: registrationNo
+                    }
+                    db.query('update users set? where username=?', [userUpdate, req.session.user], (err, result) => {
+                        if (err) {
+                            throw err
+                        } else {
+                            res.redirect('/student')
+                        }
+                    })
+                }
+            })
+
+        } else {
+            res.render('./layouts/unauthorizedAccess')
+        }
+    } else {
+        res.redirect('/login')
+    }
+}
+exports.updateDetailsForm = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.role === "Student") {
+            res.render('./layouts/studentUpdateDetails');
+        } else {
+            res.render('./layouts/unauthorizedAccess')
+        }
+    } else {
+        res.redirect('/login')
     }
 }
 exports.sendApplication = async (req, res) => {
@@ -93,7 +154,7 @@ exports.sendApplication = async (req, res) => {
     }
 }
 exports.applicationDetails = async (req, res) => {
-    if (req.sesssion.user) {
+    if (req.session.user) {
         if (req.session.role === "Student") {
             db.query('select * from applications', (err, result) => {
                 if (err) {
@@ -105,7 +166,7 @@ exports.applicationDetails = async (req, res) => {
                 }
             })
         } else {
-            res.redirect('./layouts/unauthorizedAccess')
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login');
@@ -124,7 +185,7 @@ exports.accommodationDetails = async (req, res) => {
                 }
             })
         } else {
-            res.redirect('./layouts/unauthorizedAccess')
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')

@@ -16,7 +16,7 @@ exports.showSuccessfulApplications = async (req, res) => {
                 }
             })
         } else {
-            res.redirect('./layouts/unauthorizedAccess')
+            res.render('./layouts/unauthorizedAccess');
         }
     } else {
         res.redirect('/login');
@@ -43,7 +43,7 @@ exports.viewAllocations = async (req, res) => {
                 }
             })
         } else {
-            res.redirect('./layouts/unauthorizedAccess')
+            res.render('./layouts/unauthorizedAccess')
         }
     } else {
         res.redirect('/login')
@@ -100,7 +100,7 @@ exports.viewAllocatedRooms = async (req, res) => {
                 }
             })
         } else {
-            res.redirect('./layouts/unauthorizedAccess')
+            res.render('./layouts/unauthorizedAccess');
         }
     } else {
         res.redirect('/login');

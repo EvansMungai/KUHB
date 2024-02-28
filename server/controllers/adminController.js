@@ -106,46 +106,46 @@ exports.showRooms = async (req, res) => {
         res.redirect('/login')
     }
 }
-exports.studentsRegistrationForm = async (req, res) => {
-    if (req.session.user) {
-        if (req.session.role === "Admin") {
-            res.render('./layouts/adminRegisterStudents');
-        } else {
-            res.send("Unauthorized access")
-        }
-    } else {
-        res.redirect('/login')
-    }
-}
-exports.registerStudents = async (req, res) => {
-    if (req.session.user) {
-        if (req.session.role === "Admin") {
-            var registrationNo = req.body.RegistrationNo;
-            var surname = req.body.Surname;
-            var firstName = req.body.FirstName;
-            var secondName = req.body.SecondName;
-            var gender = req.body.gender;
-            let params = {
-                RegNO: registrationNo,
-                Surname: surname,
-                FirstName: firstName,
-                SecondName: secondName,
-                Gender: gender
-            }
-            db.query('insert into students set?', params, (err, result) => {
-                if (err) {
-                    throw err
-                } else {
-                    res.redirect('/admin/students')
-                }
-            })
-        } else {
-            res.render('./layouts/unauthorizedAccess')
-        }
-    } else {
-        res.redirect('/login')
-    }
-}
+// exports.studentsRegistrationForm = async (req, res) => {
+//     if (req.session.user) {
+//         if (req.session.role === "Admin") {
+//             res.render('./layouts/adminRegisterStudents');
+//         } else {
+//             res.send("Unauthorized access")
+//         }
+//     } else {
+//         res.redirect('/login')
+//     }
+// }
+// exports.registerStudents = async (req, res) => {
+//     if (req.session.user) {
+//         if (req.session.role === "Admin") {
+//             var registrationNo = req.body.RegistrationNo;
+//             var surname = req.body.Surname;
+//             var firstName = req.body.FirstName;
+//             var secondName = req.body.SecondName;
+//             var gender = req.body.gender;
+//             let params = {
+//                 RegNO: registrationNo,
+//                 Surname: surname,
+//                 FirstName: firstName,
+//                 SecondName: secondName,
+//                 Gender: gender
+//             }
+//             db.query('insert into students set?', params, (err, result) => {
+//                 if (err) {
+//                     throw err
+//                 } else {
+//                     res.redirect('/admin/students')
+//                 }
+//             })
+//         } else {
+//             res.render('./layouts/unauthorizedAccess')
+//         }
+//     } else {
+//         res.redirect('/login')
+//     }
+// }
 exports.showStudents = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Admin") {

@@ -34,6 +34,8 @@ exports.createUser = async (req, res) => {
                 })
             }
         })
+        req.session.user = username;
+        req.session.role = "Student";
     } catch (error) {
         res.send(error);
     }
@@ -70,7 +72,7 @@ exports.authenticateUser = async (req, res) => {
                         break;
                 }
             } else {
-                res.send('Invalid password')
+                res.redirect('/login')
             }
         } catch (error) {
             console.log(error);
@@ -78,7 +80,7 @@ exports.authenticateUser = async (req, res) => {
     })
 }
 exports.logoutUser = async (req, res) => {
-    req.session.destroy((err)=>{
+    req.session.destroy((err) => {
         if (err) {
             throw err
         } else {
