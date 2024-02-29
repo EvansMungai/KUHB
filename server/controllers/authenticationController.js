@@ -43,7 +43,11 @@ exports.createUser = async (req, res) => {
         }
         db.query('insert into users set?', params, (err, result) => {
             if (err) {
-                throw err
+                res.render('./layouts/errorpage', {
+                    error: err,
+                    redirect: "Go back",
+                    redirectLink: "/signin"
+                })
             } else {
                 db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
                     if (result.length === 0) {
@@ -76,7 +80,11 @@ exports.authenticateUser = async (req, res) => {
     const password = req.body.password;
     db.query('select * from users where username=?', username, async (err, result) => {
         if (err) {
-            throw err
+            res.render('./layouts/errorpage', {
+                error: err,
+                redirect: "Go back",
+                redirectLink: "/login"
+            })
         }
         if (result.length === 0) {
             res.render('./layouts/errorpage', {
@@ -162,7 +170,11 @@ exports.changePassword = async (req, res) => {
         }
         db.query('update users set? where Username = ?;', [params, username], (err, result) => {
             if (err) {
-                throw err
+                res.render('./layouts/errorpage', {
+                    error: err,
+                    redirect: "Go back",
+                    redirectLink: "/changeUserPassword/:username"
+                })
             } else {
                 res.redirect("/login")
             }
