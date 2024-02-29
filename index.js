@@ -26,7 +26,7 @@ app.get('/logout', (req, res)=>{
     res.redirect('/');
 })
 app.get('*', (req, res)=>{
-    res.render('./layouts/errorpage');
+    res.render('./layouts/404page');
 })
 app.listen(port, (err) => {
     if (err) {
