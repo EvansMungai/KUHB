@@ -29,7 +29,11 @@ exports.viewApplications = async (req, res) => {
             var id = req.params.id;
             db.query('select * from applications where ApplicationNo=?;', id, (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/housekeeper"
+                    })
                 } else {
                     res.render('./layouts/housekeeperReviewApplications.ejs', {
                         link1: "Review applications",
@@ -57,7 +61,11 @@ exports.reviewApplictions = async (req, res) => {
             }
             db.query('Update applications set? where ApplicationNo=?', [params, id], (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/housekeeper"
+                    })
                 } else {
                     db.query('select * from applications', (err, result) => {
                         if (err) {
@@ -86,7 +94,11 @@ exports.showSuccessfulApplications = async (req, res) => {
         if (req.session.role === "Housekeeper") {
             db.query('select * from applications where Status = "Accepted"', (err, result) => {
                 if (err) {
-                    return err;
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/housekeeper"
+                    })
                 } else {
                     res.render('./layouts/housekeeperSuccessfulApplications', {
                         link1: "Review applications",
