@@ -37,7 +37,7 @@ exports.application = async (req, res) => {
                     const retrievedRegistrationNo = result.map(data => {
                         return data.RegNO
                     })
-                    db.query('select * from applications where RegistrationNo=? and not status="Accepted"', retrievedRegistrationNo, (err, result) => {
+                    db.query('select * from applications where RegistrationNo=? and not status="Rejected"', retrievedRegistrationNo, (err, result) => {
                         if (result.length === 0) {
                             db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
                                 if (err) {
