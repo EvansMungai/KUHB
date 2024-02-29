@@ -85,48 +85,50 @@ exports.authenticateUser = async (req, res) => {
                 redirect: "Go back",
                 redirectLink: "/login"
             })
-        }
-        if (result.length === 0) {
-            res.render('./layouts/errorpage', {
-                error: "User not found",
-                redirect: 'Go back',
-                redirectLink: "/login"
-            })
         } else {
-            try {
-                const retrievedHashedPassword = result.map(data => data.Password);
-                const hashedPassword = retrievedHashedPassword.toString();
-                const retrievedRole = result.map(data => data.Role);
-                const userRole = retrievedRole.toString();
-                if (await bycrpt.compare(password, hashedPassword)) {
-                    req.session.user = username;
-                    req.session.role = userRole;
-                    switch (userRole) {
-                        case "Admin":
-                            res.redirect('/admin')
-                            break;
-                        case "Student":
-                            res.redirect('/student')
-                            break;
-                        case "Housekeeper":
-                            res.redirect('/housekeeper')
-                            break;
-                        case "Matron":
-                            res.redirect('/matron')
-                            break;
-                        default:
-                            break;
+            if (result.length === 0) {
+                res.render('./layouts/errorpage', {
+                    error: "User not found",
+                    redirect: 'Go back',
+                    redirectLink: "/login"
+                })
+            } else {
+                try {
+                    const retrievedHashedPassword = result.map(data => data.Password);
+                    const hashedPassword = retrievedHashedPassword.toString();
+                    const retrievedRole = result.map(data => data.Role);
+                    const userRole = retrievedRole.toString();
+                    if (await bycrpt.compare(password, hashedPassword)) {
+                        req.session.user = username;
+                        req.session.role = userRole;
+                        switch (userRole) {
+                            case "Admin":
+                                res.redirect('/admin')
+                                break;
+                            case "Student":
+                                res.redirect('/student')
+                                break;
+                            case "Housekeeper":
+                                res.redirect('/housekeeper')
+                                break;
+                            case "Matron":
+                                res.redirect('/matron')
+                                break;
+                            default:
+                                break;
+                        }
+                    } else {
+                        res.render('./layouts/errorpage', {
+                            error: "Incorrect password",
+                            redirect: "Go back",
+                            redirectLink: "/login"
+                        })
                     }
-                } else {
-                    res.render('./layouts/errorpage', {
-                        error: "Incorrect password",
-                        redirect: "Go back",
-                        redirectLink: "/login"
-                    })
+                } catch (error) {
+                    console.log(error);
                 }
-            } catch (error) {
-                console.log(error);
             }
+
         }
     })
 }
