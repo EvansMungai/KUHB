@@ -58,7 +58,15 @@ exports.showHostels = async (req, res) => {
 exports.roomsRegistrationForm = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Admin") {
-            res.render('./layouts/adminRegisterRooms');
+            db.query('select * from hostels', (err, result)=>{
+                if (err) {
+                    throw err
+                } else {
+                    res.render('./layouts/adminRegisterRooms',{
+                        sampleData: result
+                    });
+                }
+            })
         } else {
             res.send("Unauthorized access")
         }
