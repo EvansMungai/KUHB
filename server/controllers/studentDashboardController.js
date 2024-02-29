@@ -34,15 +34,25 @@ exports.application = async (req, res) => {
                 if (err) {
                     throw err
                 } else {
-                    db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
-                        if (err) {
-                            return err;
-                        } else {
-                            res.render('./layouts/application', {
-                                sampleData: result,
+                    const retrievedRegistrationNo = result.map(data => {
+                        return data.RegNO
+                    })
+                    db.query('select * from applications where RegistrationNo=? and not status="Accepted"', retrievedRegistrationNo, (err, result) => {
+                        if (result.length === 0) {
+                            db.query('select hostels.HostelNo, hostels.HostelName, hostels.Capacity, hostels.Type, rooms.RoomNo from hostels left join rooms on hostels.HostelNo = rooms.HostelNo', (err, result) => {
+                                if (err) {
+                                    return err;
+                                } else {
+                                    res.render('./layouts/application', {
+                                        sampleData: result,
+                                    })
+                                }
                             })
+                        } else {
+                            res.redirect('/student/applicationdetails');
                         }
                     })
+
                 }
             })
         } else {
@@ -175,7 +185,7 @@ exports.applicationDetails = async (req, res) => {
                 const userRegNo = result.map(data => {
                     return data.RegNO;
                 })
-                db.query('select applications.ApplicationNo, students.RegNO, applications.Status from applications left join students on students.RegNO = applications.RegistrationNo where students.RegNO= ?', userRegNo, (err, result) => {
+                db.query('select applications.ApplicationNo, applications.ApplicationPeriod, students.RegNO, applications.Status from applications left join students on students.RegNO = applications.RegistrationNo where students.RegNO= ?', userRegNo, (err, result) => {
                     if (err) {
                         return err;
                     } else {
