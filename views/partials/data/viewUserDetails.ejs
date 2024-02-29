@@ -5,7 +5,6 @@
           <tr>
               <th scope="col">Username</th>
               <th scope="col">Role</th>
-              <th scope="col">RegNO</th>
               <th scope="col">Change Password</th>
           </tr>
         </thead>
@@ -15,7 +14,6 @@
                   <tr>
                     <td><%= data.Username %></td>
                     <td><%= data.Role %></td>
-                    <td><%= data.RegNO %></td>
                     <td><button type="button" class="btn btn-primary"><a href="/changeUserPassword/<%= data.Username %>">Change Password</a></button></td>
                   </tr>
                 <% }) %>
