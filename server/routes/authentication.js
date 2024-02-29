@@ -6,7 +6,6 @@ module.exports = (app) => {
     app.post('/signin', authenticationController.createUser);
     app.post('/login', authenticationController.authenticateUser);
     app.get('/logout', authenticationController.logoutUser);
-    app.get('/userdetails', authenticationController.viewUserDetails);
     app.get('/changeUserPassword/:username', authenticationController.changePasswordForm);
     app.post('/changeUserPassword/:username', authenticationController.changePassword);
 }

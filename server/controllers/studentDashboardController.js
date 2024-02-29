@@ -238,3 +238,18 @@ exports.accommodationDetails = async (req, res) => {
         res.redirect('/login')
     }
 }
+exports.viewUserDetails = async (req, res) => {
+    if (req.session.user) {
+        db.query('select * from users where username=?', req.session.user, (err, result) => {
+            if (err) {
+                throw err
+            } else {
+                res.render('./layouts/userDetails', {
+                    sampleData: result
+                })
+            }
+        })
+    } else {
+        res.redirect('/login')
+    }
+}
