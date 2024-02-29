@@ -4,7 +4,11 @@ exports.showSuccessfulApplications = async (req, res) => {
         if (req.session.role === "Matron") {
             db.query('select * from applications where status = "Accepted"', (err, result) => {
                 if (err) {
-                    return err;
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/matron"
+                    })
                 } else {
                     res.render('./layouts/matronDashboard', {
                         link1: "Review Allocations",
@@ -28,7 +32,11 @@ exports.viewAllocations = async (req, res) => {
             var id = req.params.id;
             db.query('select * from applications where ApplicationNo=?;', id, (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/matron"
+                    })
                 } else {
                     db.query('select * from rooms', (err, result2) => {
                         res.render('./layouts/matronReviewAllocations', {
@@ -53,7 +61,11 @@ exports.viewUserDetails = async (req, res) => {
     if (req.session.user) {
         db.query('select * from users where username=?', req.session.user, (err, result) => {
             if (err) {
-                throw err
+                res.render('./layouts/errorpage', {
+                    error: err,
+                    redirect: "Go back",
+                    redirectLink: "/matron"
+                })
             } else {
                 res.render('./layouts/matronUserDetails', {
                     link1: "Review allocations",
@@ -78,7 +90,11 @@ exports.allocateRoom = async (req, res) => {
             }
             db.query('Update applications set? where ApplicationNo=?', [params, id], (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/matron"
+                    })
                 } else {
                     db.query('select * from applications where Status = "Accepted"', (err, result) => {
                         if (err) {
@@ -107,7 +123,11 @@ exports.viewAllocatedRooms = async (req, res) => {
         if (req.session.role === "Matron") {
             db.query('select RegistrationNo, RoomNo from applications where RoomNo is not null', (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/matron"
+                    })
                 } else {
                     res.render('./layouts/allocatedRooms', {
                         link1: "Review Allocations",

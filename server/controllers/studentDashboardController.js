@@ -32,7 +32,11 @@ exports.application = async (req, res) => {
         if (req.session.role === "Student") {
             db.query('select students.RegNO, users.RegNO from students left join users on students.RegNO = users.RegNo where users.Username=?', req.session.user, (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/student"
+                    })
                 } else {
                     if (result.length === 0) {
                         res.redirect('/student')
@@ -93,7 +97,11 @@ exports.registration = async (req, res) => {
             }
             db.query('insert into students set?', params, (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/student/registration"
+                    })
                 } else {
                     let userUpdate = {
                         RegNO: registrationNo
@@ -169,7 +177,11 @@ exports.sendApplication = async (req, res) => {
             }
             db.query('insert into applications set?', params, (err, result) => {
                 if (err) {
-                    throw err;
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/student"
+                    })
                 } else {
                     res.redirect('/student/applicationdetails')
                 }
@@ -242,7 +254,11 @@ exports.viewUserDetails = async (req, res) => {
     if (req.session.user) {
         db.query('select * from users where username=?', req.session.user, (err, result) => {
             if (err) {
-                throw err
+                res.render('./layouts/errorpage', {
+                    error: err,
+                    redirect: "Go back",
+                    redirectLink: "/student"
+                })
             } else {
                 res.render('./layouts/userDetails', {
                     sampleData: result
