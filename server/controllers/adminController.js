@@ -26,7 +26,11 @@ exports.registerHostels = async (req, res) => {
             }
             db.query('insert into hostels set?', params, (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin/registerhostels"
+                    })
                 } else {
                     res.redirect('/admin')
                 }
@@ -41,7 +45,11 @@ exports.showHostels = async (req, res) => {
         if (req.session.role === "Admin") {
             db.query('select * from hostels', (err, result) => {
                 if (err) {
-                    return err;
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin"
+                    })
                 } else {
                     res.render('./layouts/adminDashboard', {
                         sampleData: result,
@@ -60,7 +68,11 @@ exports.roomsRegistrationForm = async (req, res) => {
         if (req.session.role === "Admin") {
             db.query('select * from hostels', (err, result)=>{
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin"
+                    })
                 } else {
                     res.render('./layouts/adminRegisterRooms',{
                         sampleData: result
@@ -85,7 +97,11 @@ exports.registerRooms = async (req, res) => {
             }
             db.query('insert into rooms set?', params, (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin/registerrooms"
+                    })
                 } else {
                     res.redirect('/admin/rooms')
                 }
@@ -100,7 +116,11 @@ exports.showRooms = async (req, res) => {
         if (req.session.role === "Admin") {
             db.query('select * from rooms', (err, result) => {
                 if (err) {
-                    throw err;
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go Back",
+                        redirectLink: "/admin"
+                    })
                 } else {
                     res.render('./layouts/adminDashboardRooms', {
                         sampleData: result,
@@ -119,7 +139,11 @@ exports.showStudents = async (req, res) => {
         if (req.session.role === "Admin") {
             db.query('select * from students', (err, result) => {
                 if (err) {
-                    throw err;
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin"
+                    })
                 } else {
                     res.render('./layouts/adminDashboardStudents', {
                         sampleData: result,
@@ -138,7 +162,11 @@ exports.showUsers = async (req, res) => {
         if (req.session.role === "Admin") {
             db.query('select * from users', (err, result) => {
                 if (err) {
-                    throw err;
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin"
+                    })
                 } else {
                     res.render('./layouts/adminDashboardUsers', {
                         sampleData: result,
@@ -158,7 +186,11 @@ exports.showUserDetails = async (req, res) => {
             var id = req.params.id;
             db.query('select * from users where Username=?', id, (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin"
+                    })
                 } else {
                     res.render('./layouts/adminUpdateUserRole', {
                         sampleData: result
@@ -176,7 +208,11 @@ exports.viewAccountDetails = async (req, res) => {
     if (req.session.user) {
         db.query('select * from users where username=?', req.session.user, (err, result) => {
             if (err) {
-                throw err
+                res.render('./layouts/errorpage', {
+                    error: err,
+                    redirect: "Go back",
+                    redirectLink: "/admin"
+                })
             } else {
                 res.render('./layouts/userDetails', {
                     sampleData: result
@@ -197,7 +233,11 @@ exports.changeRoles = async (req, res) => {
             }
             db.query('update users set? where Username = ?;', [params, id], (err, result) => {
                 if (err) {
-                    throw err
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin"
+                    })
                 } else {
                     res.redirect('/admin/users')
                 }
