@@ -25,6 +25,9 @@ app.get('/', (req, res) => {
 app.get('/logout', (req, res)=>{
     res.redirect('/');
 })
+app.get('*', (req, res)=>{
+    res.render('./layouts/errorpage');
+})
 app.listen(port, (err) => {
     if (err) {
         console.log(err);
