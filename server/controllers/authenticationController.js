@@ -8,9 +8,30 @@ exports.showSigninPage = async (req, res) => {
     });
 }
 exports.showLoginPage = async (req, res) => {
-    res.render('./layouts/login', {
-        pageTitle: "Log in"
-    })
+    if (req.session.user) {
+        switch (req.session.role) {
+            case "Admin":
+                res.redirect('/admin')
+                break;
+            case "Student":
+                res.redirect('/student')
+                break;
+            case "Housekeeper":
+                res.redirect('/housekeeper')
+                break;
+            case "Matron":
+                res.redirect('/matron')
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        res.render('./layouts/login', {
+            pageTitle: "Log in"
+        })
+    }
+
 }
 exports.createUser = async (req, res) => {
     try {
@@ -120,8 +141,8 @@ exports.changePasswordForm = async (req, res) => {
         res.redirect('/login')
     }
 }
-exports.changePassword = async (req, res)=>{
-    if(req.session.user){
+exports.changePassword = async (req, res) => {
+    if (req.session.user) {
         var username = req.params.username;
         const hashedPassword = await bycrpt.hash(req.body.password, 10);
         let params = {
