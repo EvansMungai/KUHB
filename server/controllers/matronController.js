@@ -49,6 +49,25 @@ exports.viewAllocations = async (req, res) => {
         res.redirect('/login')
     }
 }
+exports.viewUserDetails = async (req, res) => {
+    if (req.session.user) {
+        db.query('select * from users where username=?', req.session.user, (err, result) => {
+            if (err) {
+                throw err
+            } else {
+                res.render('./layouts/matronUserDetails', {
+                    link1: "Review allocations",
+                    link1Href: "/matron",
+                    link2: "Allocated Rooms",
+                    link2Href: "/matron/occupiedrooms",
+                    sampleData: result
+                })
+            }
+        })
+    } else {
+        res.redirect('/login')
+    }
+}
 exports.allocateRoom = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Matron") {
