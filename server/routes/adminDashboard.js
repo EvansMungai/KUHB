@@ -9,6 +9,7 @@ module.exports = (app)=>{
     app.post('/admin/registerrooms', adminController.registerRooms);
     app.get('/admin/students', adminController.showStudents);
     app.get('/admin/users', adminController.showUsers);
+    app.get('/admin/userdetails', adminController.viewAccountDetails);
     app.get('/admin/changeroles/:id', adminController.showUserDetails);
     app.post('/admin/changeroles/:username', adminController.changeRoles);
 }

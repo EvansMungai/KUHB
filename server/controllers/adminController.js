@@ -172,6 +172,21 @@ exports.showUserDetails = async (req, res) => {
         res.redirect('/login')
     }
 }
+exports.viewAccountDetails = async (req, res) => {
+    if (req.session.user) {
+        db.query('select * from users where username=?', req.session.user, (err, result) => {
+            if (err) {
+                throw err
+            } else {
+                res.render('./layouts/userDetails', {
+                    sampleData: result
+                })
+            }
+        })
+    } else {
+        res.redirect('/login')
+    }
+}
 exports.changeRoles = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Admin") {
