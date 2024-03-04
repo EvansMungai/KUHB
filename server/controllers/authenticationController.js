@@ -179,7 +179,17 @@ exports.changePassword = async (req, res) => {
                     redirectLink: "/changeUserPassword/:username"
                 })
             } else {
-                res.redirect("/login")
+                req.session.destroy(err => {
+                    if (err) {
+                        res.render('./layouts/errorpage', {
+                            error: "Incorrect password",
+                            redirect: "Go back",
+                            redirectLink: "/login"
+                        })
+                    } else {
+                        res.redirect("/login")
+                    }
+                })
             }
         })
     } else {
