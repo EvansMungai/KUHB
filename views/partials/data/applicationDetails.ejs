@@ -4,6 +4,7 @@
         <thead>
           <tr>
               <th scope="col">Application Number</th>
+              <th scope="col">Application Period</th>
               <th scope="col">Registration Number</th>
               <th scope="col">Status</th>
           </tr>
@@ -13,7 +14,8 @@
               <% sampleData.forEach((data)=>{ %>
                   <tr>
                     <td><%= data.ApplicationNo %></td>
-                    <td><%= data.RegistrationNo %></td>
+                    <td><%= data.ApplicationPeriod %></td>
+                    <td><%= data.RegNO %></td>
                     <td><%= data.Status %></td>
                   </tr>
                 <% }) %>

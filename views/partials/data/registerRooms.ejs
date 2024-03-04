@@ -6,8 +6,19 @@
       <input type="text" class="form-control" name="RoomNo" id="RoomNo" required />
 
       <label for="HostelNo" class="form-label">HOSTEL NUMBER</label>
-      <input type="text" class="form-control" name="HostelNo" id="HostelNo" required />
-
+      <select id="HostelNo" name="HostelNo" size="1" class="form-select" required>
+          <option value="" selected disabled>(select one)</option>
+      <% if (sampleData.length > 0){ %>
+        <% sampleData.forEach((data)=>{ %>
+          <option value="<%= data.HostelNo %>" class="row"><%= data.HostelNo %>.   <%= data.HostelName %></option>
+          <% }) %>
+      <% } else { %>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+      <% } %>
+      </select>
       <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </div>
   </form>

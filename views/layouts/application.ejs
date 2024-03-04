@@ -18,7 +18,7 @@
           <option value="" selected disabled>(select one)</option>
           <% if (sampleData.length > 0){ %>
             <% sampleData.forEach((data)=>{ %>
-              <option value="<%= data.HostelName %>" class="row"><%= data.HostelNo %>.   <%= data.HostelName %></option>
+              <option value="<%= data.HostelName %>" class="row"><%= data.HostelNo %>.   <%= data.HostelName %> - <%= data.Type %> Hostel</option>
               <% }) %>
           <% } else { %>
           <option value="Batian">Batian</option>
