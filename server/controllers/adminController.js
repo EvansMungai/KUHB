@@ -66,7 +66,7 @@ exports.showHostels = async (req, res) => {
 exports.roomsRegistrationForm = async (req, res) => {
     if (req.session.user) {
         if (req.session.role === "Admin") {
-            db.query('select * from hostels', (err, result)=>{
+            db.query('select * from hostels', (err, result) => {
                 if (err) {
                     res.render('./layouts/errorpage', {
                         error: err,
@@ -74,7 +74,7 @@ exports.roomsRegistrationForm = async (req, res) => {
                         redirectLink: "/admin"
                     })
                 } else {
-                    res.render('./layouts/adminRegisterRooms',{
+                    res.render('./layouts/adminRegisterRooms', {
                         sampleData: result
                     });
                 }
@@ -206,19 +206,23 @@ exports.showUserDetails = async (req, res) => {
 }
 exports.viewAccountDetails = async (req, res) => {
     if (req.session.user) {
-        db.query('select * from users where username=?', req.session.user, (err, result) => {
-            if (err) {
-                res.render('./layouts/errorpage', {
-                    error: err,
-                    redirect: "Go back",
-                    redirectLink: "/admin"
-                })
-            } else {
-                res.render('./layouts/userDetails', {
-                    sampleData: result
-                })
-            }
-        })
+        if (req.session.role === "Admin") {
+            db.query('select * from users where username=?', req.session.user, (err, result) => {
+                if (err) {
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/admin"
+                    })
+                } else {
+                    res.render('./layouts/adminUserDetails', {
+                        sampleData: result
+                    })
+                }
+            })
+        } else {
+            res.render('./layouts/unauthorizedAccess')
+        }
     } else {
         res.redirect('/login')
     }

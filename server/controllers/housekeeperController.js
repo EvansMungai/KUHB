@@ -12,6 +12,7 @@ exports.showApplications = async (req, res) => {
                         link1Href: "/housekeeper",
                         link2: "Successful Applications",
                         link2Href: "/housekeeper/successfulapplications",
+                        link3Href: "/housekeeper/userdetails",
                         sampleData: result,
                     })
                 }
@@ -40,6 +41,7 @@ exports.viewApplications = async (req, res) => {
                         link1Href: "/housekeeper",
                         link2: "Successful Applications",
                         link2Href: "/housekeeper/successfulapplications",
+                        link3Href: "/housekeeper/userdetails",
                         sampleData: result,
                     });
                 }
@@ -76,6 +78,7 @@ exports.reviewApplictions = async (req, res) => {
                                 link1Href: "/housekeeper",
                                 link2: "Successful Applications",
                                 link2Href: "/housekeeper/successfulapplications",
+                                link3Href: "/housekeeper/userdetails",
                                 sampleData: result,
                             })
                         }
@@ -105,6 +108,7 @@ exports.showSuccessfulApplications = async (req, res) => {
                         link1Href: "/housekeeper",
                         link2: "Successful Applications",
                         link2Href: "/housekeeper/successfulapplications",
+                        link3Href: "/housekeeper/userdetails",
                         sampleData: result,
                     })
                 }
@@ -114,5 +118,33 @@ exports.showSuccessfulApplications = async (req, res) => {
         }
     } else {
         res.redirect('/login');
+    }
+}
+exports.viewUserDetails = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.role === "Housekeeper") {
+            db.query('select * from users where username=?', req.session.user, (err, result) => {
+                if (err) {
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/matron"
+                    })
+                } else {
+                    res.render('./layouts/matronUserDetails', {
+                        link1: "Review applications",
+                        link1Href: "/housekeeper",
+                        link2: "Successful applications",
+                        link2Href: "/housekeeper/successfulapplications",
+                        link3Href: "/housekeeper/userdetails",
+                        sampleData: result
+                    })
+                }
+            })
+        } else {
+            res.render('./layouts/unauthorizedAccess')
+        }
+    } else {
+        res.redirect('/login')
     }
 }

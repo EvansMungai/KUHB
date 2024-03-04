@@ -15,6 +15,7 @@ exports.showSuccessfulApplications = async (req, res) => {
                         link1Href: "/matron",
                         link2: "Allocated Rooms",
                         link2Href: "/matron/occupiedrooms",
+                        link3Href: "/matron/userdetails",
                         sampleData: result,
                     })
                 }
@@ -44,6 +45,7 @@ exports.viewAllocations = async (req, res) => {
                             link1Href: "/matron",
                             link2: "Allocated Rooms",
                             link2Href: "/matron/occupiedrooms",
+                            link3Href: "/matron/userdetails",
                             sampleData: result,
                             roomsData: result2
                         });
@@ -59,23 +61,28 @@ exports.viewAllocations = async (req, res) => {
 }
 exports.viewUserDetails = async (req, res) => {
     if (req.session.user) {
-        db.query('select * from users where username=?', req.session.user, (err, result) => {
-            if (err) {
-                res.render('./layouts/errorpage', {
-                    error: err,
-                    redirect: "Go back",
-                    redirectLink: "/matron"
-                })
-            } else {
-                res.render('./layouts/matronUserDetails', {
-                    link1: "Review allocations",
-                    link1Href: "/matron",
-                    link2: "Allocated Rooms",
-                    link2Href: "/matron/occupiedrooms",
-                    sampleData: result
-                })
-            }
-        })
+        if (req.session.role === "Matron") {
+            db.query('select * from users where username=?', req.session.user, (err, result) => {
+                if (err) {
+                    res.render('./layouts/errorpage', {
+                        error: err,
+                        redirect: "Go back",
+                        redirectLink: "/matron"
+                    })
+                } else {
+                    res.render('./layouts/matronUserDetails', {
+                        link1: "Review allocations",
+                        link1Href: "/matron",
+                        link2: "Allocated Rooms",
+                        link2Href: "/matron/occupiedrooms",
+                        link3Href: "/matron/userdetails",
+                        sampleData: result
+                    })
+                }
+            })
+        } else {
+            res.render('./layouts/unauthorizedAccess')
+        }
     } else {
         res.redirect('/login')
     }
@@ -105,6 +112,7 @@ exports.allocateRoom = async (req, res) => {
                                 link1Href: "/matron",
                                 link2: "Allocated Rooms",
                                 link2Href: "/matron/occupiedrooms",
+                                link3Href: "/matron/userdetails",
                                 sampleData: result,
                             })
                         }
@@ -134,6 +142,7 @@ exports.viewAllocatedRooms = async (req, res) => {
                         link1Href: "/matron",
                         link2: "Allocated Rooms",
                         link2Href: "/matron/occupiedrooms",
+                        link3Href: "/matron/userdetails",
                         sampleData: result,
                     })
                 }
