@@ -19,6 +19,7 @@ Frontend- Bootstrap and CSS modules
    - An IDE: You can use any IDE of your choice like [Visual Studio](https://visualstudio.microsoft.com/), [Visual Studio Code](https://code.visualstudio.com/) or [JetBrains Rider](https://www.jetbrains.com/rider/).
 
 2. Clone the repository
+
     You can clone the repository using the command:
 
     ``` bash
@@ -27,8 +28,9 @@ Frontend- Bootstrap and CSS modules
 
     ```
 
-3. Restore dependencies
-    You can restore the dependencies used by this project using the command:
+4. Restore dependencies
+
+   You can restore the dependencies used by this project using the command:
 
     ``` bash
 
@@ -36,7 +38,7 @@ Frontend- Bootstrap and CSS modules
 
     ```
 
-4. Import the database
+5. Import the database
 
     You can find the starter database in the Server directory.
     Run MySQl and create an empty database. Exit MySQL and run the following command:
