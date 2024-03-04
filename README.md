@@ -63,10 +63,6 @@ Frontend- Bootstrap and CSS modules
    [UHB](https://localhost:3000)
 
 
-## Usage
-
-### Folder structure
-
 
 
 &copy;2024
