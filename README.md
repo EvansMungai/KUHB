@@ -6,7 +6,7 @@ This project is a web based application where universities can provide internal 
 
 ## Tech stack
 
-Backend - NOdeJS, ExpressJS and MySQl Database
+Backend - NodeJS, ExpressJS and MySQl Database
 Frontend- Bootstrap and CSS modules
 
 ## Installation
@@ -64,6 +64,3 @@ Frontend- Bootstrap and CSS modules
 
 
 
-
-&copy;2024
-# UHB
