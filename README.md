@@ -50,7 +50,18 @@ Frontend- Bootstrap and CSS modules
     ```
     Replace username with database username, databaseName with the name of the empty database and dumpfile.sql with the file found in the server directory.
 
-6. Start the Project in Development Server
+6. Create a .env file and add the following in the lines in the file
+   
+    ``` bash
+
+    Host = localhost
+    User = databaseUsername
+    Password = databasePassword
+
+    ```
+    Replace "databaseUsername" with username used to access the database, "databasePassword" with password used to access the database.
+
+7. Start the Project in Development Server
 
     You can start the project in development mode using the command:
 
@@ -59,7 +70,7 @@ Frontend- Bootstrap and CSS modules
     nodemon index.js
 
     ```
-7. Check out the system in the web browser
+8. Check out the system in the web browser
    [UHB](https://localhost:3000)
 
 
