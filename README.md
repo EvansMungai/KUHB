@@ -45,7 +45,7 @@ Frontend- Bootstrap and CSS modules
 
     ``` bash
 
-    mysqldump -u username -p databaseName < dumpfile.sql
+    mysql -u username -p databaseName < dumpfile.sql
 
     ```
     Replace username with database username, databaseName with the name of the empty database and dumpfile.sql with the file found in the server directory.
