@@ -12,7 +12,11 @@
             <input type="number" class="form-control" name="Capacity" id="Capacity" required/>
 
             <label for="Type" class="form-label">Type</label>
-            <input type="text" class="form-control" name="Type" id="Type" required/>
+            <select id="Type" name="Type" size="1" class="form-select" required>
+              <option value="" selected disabled>(select one)</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+          </select>
 
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
           </div>
