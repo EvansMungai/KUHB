@@ -1,9 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const app = express();
 const port = 3000;
 
 app.set('view engine', 'ejs');
+app.use(session({
+    secret: 'mysecret',
+    resave: false,
+    saveUninitialized: true
+}))
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -18,6 +24,9 @@ app.get('/', (req, res) => {
 })
 app.get('/logout', (req, res)=>{
     res.redirect('/');
+})
+app.get('*', (req, res)=>{
+    res.render('./layouts/404page');
 })
 app.listen(port, (err) => {
     if (err) {

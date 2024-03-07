@@ -8,9 +8,8 @@ module.exports = (app)=>{
     app.get('/admin/registerrooms', adminController.roomsRegistrationForm);
     app.post('/admin/registerrooms', adminController.registerRooms);
     app.get('/admin/students', adminController.showStudents);
-    app.get('/admin/registerstudents', adminController.studentsRegistrationForm);
-    app.post('/admin/registerstudents', adminController.registerStudents);
     app.get('/admin/users', adminController.showUsers);
+    app.get('/admin/userdetails', adminController.viewAccountDetails);
     app.get('/admin/changeroles/:id', adminController.showUserDetails);
     app.post('/admin/changeroles/:username', adminController.changeRoles);
 }
