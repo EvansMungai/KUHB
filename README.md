@@ -57,9 +57,10 @@ Frontend- Bootstrap and CSS modules
     Host = localhost
     User = databaseUsername
     Password = databasePassword
+    Database = databaseName
 
     ```
-    Replace "databaseUsername" with username used to access the database, "databasePassword" with password used to access the database.
+    Replace "databaseUsername" with username used to access the database, "databasePassword" with password used to access the database, "databaseName" with the database you want to select.
 
 7. Start the Project in Development Server
 
